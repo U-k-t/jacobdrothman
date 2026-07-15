@@ -1,4 +1,4 @@
-import { Download, Briefcase, GraduationCap, Award } from "lucide-react";
+import { Briefcase, GraduationCap, Award } from "lucide-react";
 
 export function Resume() {
   const experience = [
@@ -94,13 +94,7 @@ export function Resume() {
     <div className="min-h-[calc(100vh-theme(spacing.16))]">
       <section className="py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-12">
-            <h1>Resume</h1>
-            <button className="flex items-center gap-2 bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-[#1fa2ff]/25 transition-all self-start">
-              <Download size={20} />
-              Download PDF
-            </button>
-          </div>
+          <h1 className="mb-12">Resume</h1>
 
           <div className="space-y-12">
             <div>

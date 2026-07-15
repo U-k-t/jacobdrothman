@@ -1,9 +1,9 @@
 export function TravelMap() {
   const destinations = [
-    { name: "Japan", x: 75, y: 35 },
-    { name: "New Zealand", x: 85, y: 75 },
-    { name: "Iceland", x: 45, y: 20 },
-    { name: "Portugal", x: 45, y: 40 },
+    { name: "Southern California", x: 15, y: 40 },
+    { name: "Europe", x: 48, y: 25 },
+    { name: "East Asia", x: 80, y: 35 },
+    { name: "Alaska", x: 20, y: 15 },
   ];
 
   return (

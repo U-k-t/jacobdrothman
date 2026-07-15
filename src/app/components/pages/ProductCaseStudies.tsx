@@ -3,36 +3,25 @@ import { Users, Target, BarChart } from "lucide-react";
 export function ProductCaseStudies() {
   const caseStudies = [
     {
-      title: "Mobile App Redesign",
-      company: "FinTech Startup",
-      impact: "150% increase in user engagement",
-      description: "Led a complete mobile app redesign based on extensive user research and data analysis. Collaborated with design and engineering to deliver a seamless experience.",
+      title: "AI Infrastructure Product Launch",
+      company: "Infineon Technologies",
+      impact: "$30M+ revenue generated",
+      description: "Owned the product roadmap for a line of components serving AI infrastructure customers at Infineon Technologies. Translated customer requirements into feature and positioning decisions, then worked cross-functionally with engineering and go-to-market teams to take the product from requirements through launch — a requirements-to-roadmap-to-launch process that applies just as directly to software products.",
       metrics: [
-        "150% increase in daily active users",
-        "40% reduction in support tickets",
-        "4.8 star rating on app stores",
+        "$30M+ revenue generated",
+        "20%+ adoption increase in a high-growth market",
+        "Directly informed division roadmap strategy",
       ],
     },
     {
-      title: "B2B SaaS Platform Launch",
-      company: "Enterprise Software Company",
-      impact: "$2M ARR in first year",
-      description: "Defined product vision and go-to-market strategy for a new B2B platform. Coordinated cross-functional teams through beta, launch, and iteration phases.",
+      title: "B2B Marketplace Co-Founding",
+      company: "Trusty (formerly Glacier)",
+      impact: "$1.2M in seed funding",
+      description: "Co-founded a B2B proptech marketplace for broker-sourced comparables, enabling listing discovery and purchase workflows for commercial real estate professionals. Owned the discovery-to-roadmap process end to end — translating broker research into requirements and prioritized feature concepts, then running experiments and journey analysis to validate needs and guide pivots.",
       metrics: [
-        "$2M ARR within 12 months",
-        "25 enterprise customers onboarded",
-        "95% customer satisfaction score",
-      ],
-    },
-    {
-      title: "AI-Powered Feature Suite",
-      company: "Marketing Tech Platform",
-      impact: "35% improvement in user retention",
-      description: "Championed the integration of AI capabilities to automate repetitive tasks. Balanced innovation with user trust and transparency.",
-      metrics: [
-        "35% improvement in user retention",
-        "60% reduction in time to complete key tasks",
-        "Featured in industry publications",
+        "Led product from 0-to-1 as a co-founder",
+        "$1.2M in VC funding, informed by early GTM traction",
+        "Broker research directly shaped the product roadmap",
       ],
     },
   ];

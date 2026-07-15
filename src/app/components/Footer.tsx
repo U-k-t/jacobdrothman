@@ -1,5 +1,9 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 
+// Built at runtime rather than a literal string, so the address isn't sitting in
+// the page as scrapeable plaintext.
+const CONTACT_EMAIL = ["mrjrothman", "gmail.com"].join("@");
+
 export function Footer() {
   return (
     <footer className="border-t border-border bg-background">
@@ -28,7 +32,7 @@ export function Footer() {
               <Linkedin size={20} />
             </a>
             <a
-              href="mailto:mrjrothman@gmail.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="text-muted-foreground hover:text-[#1fa2ff] transition-colors"
               aria-label="Email"
             >

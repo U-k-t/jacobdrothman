@@ -11,10 +11,10 @@ export function Home() {
             <h1 className="text-4xl lg:text-6xl mb-6 tracking-tight">
               Jacob Rothman
               <br />
-              <span className="bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] bg-clip-text text-transparent">Product Manager, AI Infrastructure & Technical Products</span>
+              <span className="bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] bg-clip-text text-transparent">Product Manager, Roadmaps, Data & Customer-Driven Decisions</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-              Product Manager with a CS background and B2B marketplace startup experience, driving roadmap, customer requirements, analytics, and launches across AI infrastructure and technical products.
+              Product Manager with a CS background and B2B marketplace startup experience — translating customer needs into product strategy, prioritizing with data, and leading cross-functional teams from requirements through launch.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -82,10 +82,10 @@ export function Home() {
                 Building tools and applications that solve real problems, leveraging my technical background in software development.
               </p>
               <Link
-                to="/portfolio/software-projects"
+                to="/resume"
                 className="inline-flex items-center gap-1 text-[#1fa2ff] mt-4 hover:gap-2 transition-all"
               >
-                Explore Projects
+                See Technical Skills
                 <ArrowRight size={16} />
               </Link>
             </div>

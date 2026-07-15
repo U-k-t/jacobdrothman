@@ -1,6 +1,10 @@
 import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { useState } from "react";
 
+// Built at runtime rather than a literal string, so the address isn't sitting in
+// the page as scrapeable plaintext.
+const CONTACT_EMAIL = ["mrjrothman", "gmail.com"].join("@");
+
 export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,7 +15,11 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    const body = `From: ${formData.name} (${formData.email})\n\n${formData.message}`;
+    const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      formData.subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
   };
 
   const handleChange = (
@@ -116,13 +124,13 @@ export function Contact() {
                 <h3 className="mb-4">Connect With Me</h3>
                 <div className="space-y-4">
                   <a
-                    href="mailto:mrjrothman@gmail.com"
+                    href={`mailto:${CONTACT_EMAIL}`}
                     className="flex items-center gap-3 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
                   >
                     <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Mail size={20} className="text-[#1fa2ff]" />
                     </div>
-                    <span>mrjrothman@gmail.com</span>
+                    <span>Email</span>
                   </a>
                   <a
                     href="https://linkedin.com/in/jacob-rothman"

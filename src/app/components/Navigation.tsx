@@ -92,15 +92,9 @@ export function Navigation() {
                 </Link>
                 <Link
                   to="/portfolio/process-improvement"
-                  className="block px-4 py-2 hover:bg-accent transition-colors"
-                >
-                  Process Improvement
-                </Link>
-                <Link
-                  to="/portfolio/software-projects"
                   className="block px-4 py-2 hover:bg-accent rounded-b-lg transition-colors"
                 >
-                  Software Projects
+                  Process Improvement
                 </Link>
               </div>
             </div>
@@ -205,13 +199,6 @@ export function Navigation() {
                     className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
                   >
                     Process Improvement
-                  </Link>
-                  <Link
-                    to="/portfolio/software-projects"
-                    onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
-                  >
-                    Software Projects
                   </Link>
                 </div>
               )}

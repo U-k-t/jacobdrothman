@@ -2,27 +2,35 @@ import { MapPin } from "lucide-react";
 import { TravelMap } from "../TravelMap";
 
 export function Travel() {
-  const destinations = [
+  const timeline = [
+    { year: "2026", places: ["Zurich", "Rome"] },
+    { year: "2025", places: ["California Central Coast"] },
+    { year: "2024", places: ["Taipei, Shenzhen & Shanghai", "Shanghai & Taipei"] },
+    { year: "2023", places: ["Taipei", "Tokyo, Kyoto & Osaka"] },
     {
-      location: "Japan",
-      year: "2024",
-      description: "Immersed in the blend of ancient traditions and cutting-edge technology. The attention to detail in Japanese design inspired my approach to product development.",
-    },
-    {
-      location: "New Zealand",
-      year: "2023",
-      description: "Trekked through stunning landscapes while learning about Māori culture and their deep connection to the land. A masterclass in sustainable thinking.",
-    },
-    {
-      location: "Iceland",
-      year: "2023",
-      description: "Explored volcanic landscapes and witnessed the northern lights. The raw power of nature reminded me to think big and embrace uncertainty.",
-    },
-    {
-      location: "Portugal",
       year: "2022",
-      description: "Discovered the perfect balance of old-world charm and modern innovation in Lisbon's tech scene. Great pastel de nata too.",
+      places: [
+        "Ljubljana",
+        "Venice",
+        "Salzburg & Hallstatt",
+        "Munich, Germany — moved for work",
+        "Madrid",
+        "Amsterdam",
+        "Berlin",
+        "Turin",
+        "Budapest",
+        "Geneva & Lyon",
+        "Barcelona",
+        "Prague",
+      ],
     },
+    { year: "2021", places: ["Villach, Austria — moved for work", "Vienna", "Florence"] },
+    { year: "2016", places: ["Ireland (road trip)"] },
+    { year: "2015", places: ["Seattle", "Alaska Cruise (+ Canada)"] },
+    { year: "2014", places: ["New England (college tour)", "Puerto Rico", "Caribbean Cruise"] },
+    { year: "2013", places: ["Caribbean Cruise"] },
+    { year: "2010", places: ["London", "Paris", "Rome", "Mediterranean Cruise"] },
+    { year: "2006", places: ["Ensenada, Mexico"] },
   ];
 
   return (
@@ -32,15 +40,19 @@ export function Travel() {
           <h1 className="mb-6">Travel Adventures</h1>
 
           <p className="text-lg text-muted-foreground mb-12">
-            Travel broadens my perspective and informs how I approach product management. Every destination offers unique insights into how people solve problems, interact with technology, and build communities.
+            I grew up in Southern California, and travel has been a constant since — from
+            family trips and cruises early on to two work relocations to Europe (Villach,
+            Austria in 2021, then Munich, Germany in 2022) that put most of the continent
+            within a short flight. That same curiosity has taken me across East Asia and
+            back home to explore more of California too.
           </p>
 
           <TravelMap />
 
-          <div className="space-y-8">
-            {destinations.map((destination, index) => (
+          <div className="space-y-6">
+            {timeline.map((entry) => (
               <div
-                key={index}
+                key={entry.year}
                 className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-[#1fa2ff]/30 transition-all"
               >
                 <div className="flex items-start gap-4">
@@ -48,11 +60,17 @@ export function Travel() {
                     <MapPin className="text-[#1fa2ff]" size={20} />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <h3>{destination.location}</h3>
-                      <span className="text-muted-foreground">{destination.year}</span>
+                    <h3 className="mb-2">{entry.year}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {entry.places.map((place) => (
+                        <span
+                          key={place}
+                          className="bg-accent px-3 py-1 rounded-full text-sm text-muted-foreground"
+                        >
+                          {place}
+                        </span>
+                      ))}
                     </div>
-                    <p className="text-muted-foreground">{destination.description}</p>
                   </div>
                 </div>
               </div>

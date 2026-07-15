@@ -3,36 +3,25 @@ import { CheckCircle, Zap, Users2 } from "lucide-react";
 export function ProcessImprovement() {
   const improvements = [
     {
-      title: "Agile Transformation",
-      context: "Growing startup transitioning from ad-hoc to structured development",
-      challenge: "Team struggling with unclear priorities, missed deadlines, and low morale",
-      solution: "Implemented two-week sprints with clear ceremonies, defined roles, and transparent backlog management",
+      title: "Reporting Automation",
+      context: "Product performance tracking relied on manual, recurring analysis across teams",
+      challenge: "Manual reporting was slow and inconsistent, eating into time that should have gone toward roadmap work",
+      solution: "Built Python automation to generate recurring reports, and built KPI dashboards for 6 teams to track adoption and monitor product performance",
       results: [
-        "30% increase in team velocity",
-        "90% on-time delivery rate",
-        "Improved team satisfaction scores",
+        "10+ hours/week of manual analysis eliminated",
+        "Consistent performance tracking across 6 teams",
+        "Freed up time for roadmap-level decision-making",
       ],
     },
     {
-      title: "Cross-Functional Collaboration Framework",
-      context: "Siloed teams causing communication breakdowns and duplicated work",
-      challenge: "Engineering, design, and marketing working in isolation, leading to misaligned priorities",
-      solution: "Created shared OKRs, bi-weekly sync meetings, and collaborative roadmap planning sessions",
+      title: "Funnel Analysis for Roadmap Prioritization",
+      context: "Roadmap decisions needed a clearer read on where users were dropping off",
+      challenge: "Without a systematic view of funnel performance, it was hard to prioritize the highest-impact experiments",
+      solution: "Analyzed funnel performance to identify conversion gaps, then used those findings to prioritize experiments and guide product improvements",
       results: [
-        "50% reduction in duplicate efforts",
-        "Faster time-to-market for new features",
-        "Stronger alignment on company goals",
-      ],
-    },
-    {
-      title: "User Research Integration",
-      context: "Product decisions being made without user validation",
-      challenge: "Features shipped based on assumptions rather than user needs",
-      solution: "Established regular user interviews, usability testing, and feedback loops integrated into sprint planning",
-      results: [
-        "75% of features validated before development",
-        "Reduced feature abandonment rate",
-        "Higher user satisfaction scores",
+        "Conversion gaps identified and prioritized systematically",
+        "Experimentation roadmap grounded in funnel data",
+        "Improvements guided by evidence rather than assumption",
       ],
     },
   ];
