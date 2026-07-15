@@ -42,6 +42,11 @@
   --brand-blue: #1fa2ff;
   --brand-blue-light: #60b8ff;
   --brand-blue-dark: #0d8ae6;
+  --travel-mode-air: var(--brand-blue);
+  --travel-mode-boat: #14b8a6;
+  --travel-mode-train: #f59e0b;
+  --travel-mode-automotive: #8b5cf6;
+  --travel-mode-unresolved: var(--muted-foreground);
 }
 
 .dark {
@@ -82,6 +87,11 @@
   --brand-blue: #1fa2ff;
   --brand-blue-light: #60b8ff;
   --brand-blue-dark: #0d8ae6;
+  --travel-mode-air: var(--brand-blue);
+  --travel-mode-boat: #14b8a6;
+  --travel-mode-train: #f59e0b;
+  --travel-mode-automotive: #8b5cf6;
+  --travel-mode-unresolved: var(--muted-foreground);
 }
 
 @theme inline {
@@ -126,6 +136,11 @@
   --color-brand-blue: var(--brand-blue);
   --color-brand-blue-light: var(--brand-blue-light);
   --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-travel-mode-air: var(--travel-mode-air);
+  --color-travel-mode-boat: var(--travel-mode-boat);
+  --color-travel-mode-train: var(--travel-mode-train);
+  --color-travel-mode-automotive: var(--travel-mode-automotive);
+  --color-travel-mode-unresolved: var(--travel-mode-unresolved);
 }
 
 @layer base {
