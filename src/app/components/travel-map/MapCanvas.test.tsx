@@ -29,33 +29,43 @@ vi.mock("motion/react", async () => {
 
 const { MapCanvas } = await import("./MapCanvas");
 
+const LAX_POINT = { id: "lax", name: "Los Angeles", country: "United States", lat: 33.94, lng: -118.4 };
+const ENSENADA_POINT = { id: "ensenada", name: "Ensenada", country: "Mexico", lat: 31.87, lng: -116.62 };
+
 const legA: RouteLeg = {
   id: "leg-a",
   order: 1,
-  origin: { id: "lax", name: "Los Angeles (LAX)", lat: 33.94, lng: -118.4 },
-  destination: { id: "ensenada", name: "Ensenada", lat: 31.87, lng: -116.62 },
+  origin: LAX_POINT,
+  destination: ENSENADA_POINT,
   travelMode: undefined,
   direction: "outbound",
   isRelocation: false,
-  tripId: "ensenada-2006",
+  journeyId: "ensenada-2006",
   label: "Ensenada",
-  year: "2006",
+  year: 2006,
 };
 
 const legB: RouteLeg = {
   id: "leg-b",
   order: 2,
-  origin: { id: "ensenada", name: "Ensenada", lat: 31.87, lng: -116.62 },
-  destination: { id: "lax", name: "Los Angeles (LAX)", lat: 33.94, lng: -118.4 },
+  origin: ENSENADA_POINT,
+  destination: LAX_POINT,
   travelMode: "boat",
   direction: "return",
   isRelocation: false,
-  tripId: "ensenada-2006",
-  label: "Returned to Los Angeles (LAX)",
-  year: "2006",
+  journeyId: "ensenada-2006",
+  label: "Returned to Los Angeles",
+  year: 2006,
 };
 
 describe("MapCanvas", () => {
+  it("shows the Los Angeles origin marker immediately, before any leg has started", () => {
+    const { container } = render(<MapCanvas legs={[legA, legB]} activeLegIndex={-1} />);
+    expect(container.querySelectorAll('[data-testid="active-route-path"]')).toHaveLength(0);
+    // One marker group should already be rendered for the LAX origin.
+    expect(container.querySelectorAll("circle").length).toBeGreaterThan(0);
+  });
+
   it("renders exactly one active path for the current leg", () => {
     const { container } = render(<MapCanvas legs={[legA, legB]} activeLegIndex={0} />);
     expect(container.querySelectorAll('[data-testid="active-route-path"]')).toHaveLength(1);

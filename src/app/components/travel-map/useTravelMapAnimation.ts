@@ -1,33 +1,50 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { RouteLeg } from "./routeLegs";
+import { computeGapPauseMs, TIMING_CONFIG } from "./timing";
 
 interface UseTravelMapAnimationOptions {
-  /** Total number of route legs to animate through. */
-  legCount: number;
-  /** Milliseconds to hold each leg active before advancing to the next. */
-  stepMs?: number;
+  legs: RouteLeg[];
 }
 
 interface UseTravelMapAnimationResult {
   containerRef: React.RefObject<HTMLDivElement | null>;
-  /** -1 before the first leg starts; legCount once every leg has played. */
+  /** -1 before the first leg starts; legs.length once every leg has played. */
   activeLegIndex: number;
   isReducedMotion: boolean;
   isComplete: boolean;
-  /** Resets to the first leg and replays. Jumps straight to the end for reduced motion. */
+  /** Resets to Los Angeles / the first leg and replays. Jumps straight to the end for reduced motion. */
   replay: () => void;
 }
 
 /**
- * Drives the sequential leg-by-leg route animation: starts once the map scrolls
- * into view, holds one leg "active" at a time, and collapses straight to the
- * complete state for prefers-reduced-motion. A single timeout ref is cleared at
- * the top of every effect run so overlapping timers can never accumulate, on
- * replay or otherwise. Cleans up its timer and observer on unmount.
+ * Delay before revealing `legs[nextIndex]`, in milliseconds: the time it takes the previous
+ * leg's path to finish drawing, plus a dwell at its destination, plus — only when the next leg
+ * belongs to a *different* journey — a pause scaled to the real calendar gap between the two
+ * journeys' start dates. Stops within the same journey never get that calendar-gap pause.
  */
-export function useTravelMapAnimation({
-  legCount,
-  stepMs = 900,
-}: UseTravelMapAnimationOptions): UseTravelMapAnimationResult {
+function delayBeforeLeg(legs: RouteLeg[], nextIndex: number): number {
+  if (nextIndex <= 0 || nextIndex >= legs.length) {
+    return 0;
+  }
+  const previous = legs[nextIndex - 1];
+  const next = legs[nextIndex];
+  const gapPauseMs =
+    previous.journeyId === next.journeyId
+      ? 0
+      : computeGapPauseMs({ month: previous.month, year: previous.year }, { month: next.month, year: next.year });
+  return TIMING_CONFIG.legDurationMs + TIMING_CONFIG.dwellMs + gapPauseMs;
+}
+
+/**
+ * Drives the sequential leg-by-leg route animation: starts once the map scrolls
+ * into view, holds one leg "active" at a time with pacing derived from the real
+ * month/year gap between journeys, and collapses straight to the complete state
+ * for prefers-reduced-motion. A single timeout ref is cleared at the top of every
+ * effect run so overlapping timers can never accumulate, on replay or otherwise.
+ * Cleans up its timer and observer on unmount.
+ */
+export function useTravelMapAnimation({ legs }: UseTravelMapAnimationOptions): UseTravelMapAnimationResult {
+  const legCount = legs.length;
   const containerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<number | null>(null);
   const [isReducedMotion, setIsReducedMotion] = useState(() =>
@@ -91,13 +108,14 @@ export function useTravelMapAnimation({
       return;
     }
 
-    const delay = activeLegIndex < 0 ? 0 : stepMs;
+    const nextIndex = activeLegIndex + 1;
+    const delay = activeLegIndex < 0 ? 0 : delayBeforeLeg(legs, nextIndex);
     timeoutRef.current = window.setTimeout(() => {
       setActiveLegIndex((prev) => Math.min(prev + 1, legCount));
     }, delay);
 
     return clearPendingTimeout;
-  }, [hasStarted, isReducedMotion, legCount, activeLegIndex, stepMs, clearPendingTimeout]);
+  }, [hasStarted, isReducedMotion, legCount, activeLegIndex, legs, clearPendingTimeout]);
 
   const replay = useCallback(() => {
     // Deliberately does not touch the timer directly: the step-timer effect above

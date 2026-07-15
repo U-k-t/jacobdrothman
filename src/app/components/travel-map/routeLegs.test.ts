@@ -1,118 +1,143 @@
 import { describe, expect, it } from "vitest";
-import { LAX, MUNICH, VILLACH } from "../../data/travelLocations";
-import { trips } from "../../data/travelTrips";
+import { LAX, MUNICH, VILLACH, type Location } from "../../data/travelLocations";
+import { journeys, type Journey } from "../../data/travelJourneys";
 import { buildRouteLegs } from "./routeLegs";
 
-describe("buildRouteLegs", () => {
-  const legs = buildRouteLegs(trips);
+const ENSENADA: Location = { id: "ensenada", name: "Ensenada", country: "Mexico", lat: 31.87, lng: -116.62 };
+const TAIPEI: Location = { id: "taipei", name: "Taipei", country: "Taiwan", lat: 25.03, lng: 121.57 };
+const SHENZHEN: Location = { id: "shenzhen", name: "Shenzhen", country: "China", lat: 22.54, lng: 114.06 };
+const SHANGHAI: Location = { id: "shanghai", name: "Shanghai", country: "China", lat: 31.23, lng: 121.47 };
 
-  it("preserves chronological trip order across generated legs", () => {
+describe("buildRouteLegs — real dataset", () => {
+  const legs = buildRouteLegs(journeys);
+
+  it("preserves chronological journey order across generated legs", () => {
     for (let i = 1; i < legs.length; i++) {
       expect(legs[i].order).toBeGreaterThan(legs[i - 1].order);
     }
-    // Every trip id appears in the same relative order as `trips`.
-    const tripIdOrderOfFirstAppearance = trips.map((t) => t.id);
+    const journeyIdOrderOfFirstAppearance = journeys.map((j) => j.id);
     const seen = new Set<string>();
-    const legTripOrder: string[] = [];
+    const legJourneyOrder: string[] = [];
     for (const leg of legs) {
-      if (!seen.has(leg.tripId)) {
-        seen.add(leg.tripId);
-        legTripOrder.push(leg.tripId);
+      if (!seen.has(leg.journeyId)) {
+        seen.add(leg.journeyId);
+        legJourneyOrder.push(leg.journeyId);
       }
     }
-    expect(legTripOrder).toEqual(tripIdOrderOfFirstAppearance);
+    expect(legJourneyOrder).toEqual(journeyIdOrderOfFirstAppearance);
   });
 
-  it("defaults trips to LAX as origin and destination for a normal roundtrip", () => {
-    const out = legs.find((l) => l.id === "ensenada-2006-out")!;
-    const ret = legs.find((l) => l.id === "ensenada-2006-return")!;
+  it("generates LAX -> Ensenada -> LAX as the very first journey", () => {
+    const out = legs.find((l) => l.journeyId === "ensenada-2006" && l.direction === "outbound")!;
+    const ret = legs.find((l) => l.journeyId === "ensenada-2006" && l.direction === "return")!;
     expect(out.origin.id).toBe(LAX.id);
     expect(out.destination.id).toBe("ensenada");
     expect(ret.origin.id).toBe("ensenada");
     expect(ret.destination.id).toBe(LAX.id);
   });
 
-  it("uses Villach as the origin for the Vienna-through-Venice group", () => {
-    for (const tripId of ["vienna-2021-out", "florence-2021-out", "ljubljana-2022-out", "venice-2022-out"]) {
-      const leg = legs.find((l) => l.id === tripId)!;
-      expect(leg.origin.id).toBe(VILLACH.id);
-    }
-    for (const tripId of ["vienna-2021-return", "florence-2021-return", "ljubljana-2022-return", "venice-2022-return"]) {
-      const leg = legs.find((l) => l.id === tripId)!;
-      expect(leg.destination.id).toBe(VILLACH.id);
-    }
+  it("generates the multi-stop LAX -> Taipei -> Shenzhen -> Shanghai -> LAX journey in order", () => {
+    const journeyLegs = legs.filter((l) => l.journeyId === "taipei-2024");
+    expect(journeyLegs.map((l) => `${l.origin.name}->${l.destination.name}`)).toEqual([
+      "Los Angeles->Taipei",
+      "Taipei->Shenzhen",
+      "Shenzhen->Shanghai",
+      "Shanghai->Los Angeles",
+    ]);
   });
 
-  it("returns from Villach to LAX before the next non-Villach trip", () => {
-    const venetoReturnIndex = legs.findIndex((l) => l.id === "venice-2022-return");
-    const transitionIndex = legs.findIndex(
-      (l) => l.isRelocation && l.origin.id === VILLACH.id && l.destination.id === LAX.id,
-    );
-    const salzburgOutIndex = legs.findIndex((l) => l.id === "salzburg-2022-out");
-
-    expect(transitionIndex).toBeGreaterThan(venetoReturnIndex);
-    expect(salzburgOutIndex).toBeGreaterThan(transitionIndex);
-
-    const salzburgOut = legs[salzburgOutIndex];
-    expect(salzburgOut.origin.id).toBe(LAX.id);
+  it("does not insert an automatic return leg between Taipei, Shenzhen, and Shanghai", () => {
+    const journeyLegs = legs.filter((l) => l.journeyId === "taipei-2024");
+    const returns = journeyLegs.filter((l) => l.direction === "return");
+    expect(returns).toHaveLength(1);
+    expect(returns[0].destination.id).toBe(LAX.id);
   });
 
-  it("uses Munich as the origin for the Madrid-through-Prague group", () => {
-    for (const tripId of [
-      "madrid-2022-out",
-      "amsterdam-2022-out",
-      "berlin-2022-out",
-      "turin-2022-out",
-      "budapest-2022-out",
-      "geneva-2022-out",
-      "barcelona-2022-out",
-      "prague-2022-out",
-    ]) {
-      const leg = legs.find((l) => l.id === tripId)!;
-      expect(leg.origin.id).toBe(MUNICH.id);
+  it("uses Villach as the origin for its round-trip journeys", () => {
+    for (const journeyId of ["vienna-2021", "florence-2021", "ljubljana-2022", "venice-2022"]) {
+      const outLeg = legs.find((l) => l.journeyId === journeyId && l.direction === "outbound")!;
+      const returnLeg = legs.find((l) => l.journeyId === journeyId && l.direction === "return")!;
+      expect(outLeg.origin.id).toBe(VILLACH.id);
+      expect(returnLeg.destination.id).toBe(VILLACH.id);
     }
   });
 
-  it("returns from Munich to LAX after the group completes", () => {
-    const pragueReturnIndex = legs.findIndex((l) => l.id === "prague-2022-return");
-    const transitionIndex = legs.findIndex(
-      (l) => l.isRelocation && l.origin.id === MUNICH.id && l.destination.id === LAX.id,
-    );
-    const taipeiOutIndex = legs.findIndex((l) => l.id === "taipei-2023-out");
-
-    expect(transitionIndex).toBeGreaterThan(pragueReturnIndex);
-    expect(taipeiOutIndex).toBeGreaterThan(transitionIndex);
-    expect(legs[taipeiOutIndex].origin.id).toBe(LAX.id);
+  it("uses Munich as the origin for its round-trip journeys", () => {
+    for (const journeyId of ["madrid-2022", "prague-2022"]) {
+      const outLeg = legs.find((l) => l.journeyId === journeyId && l.direction === "outbound")!;
+      expect(outLeg.origin.id).toBe(MUNICH.id);
+    }
   });
 
-  it("models the initial relocations as one-way legs with no return", () => {
-    const villachMove = legs.find((l) => l.id === "move-villach-2021")!;
-    expect(villachMove.origin.id).toBe(LAX.id);
-    expect(villachMove.destination.id).toBe(VILLACH.id);
-    expect(legs.some((l) => l.id === "move-villach-2021-return")).toBe(false);
+  it("does not invent a return leg for the one-way relocation journeys", () => {
+    const villachMove = legs.filter((l) => l.journeyId === "villach-2021");
+    expect(villachMove).toHaveLength(1);
+    expect(villachMove[0].origin.id).toBe(LAX.id);
+    expect(villachMove[0].destination.id).toBe(VILLACH.id);
+    expect(villachMove[0].isRelocation).toBe(true);
 
-    const munichMove = legs.find((l) => l.id === "move-munich-2022")!;
-    expect(munichMove.origin.id).toBe(LAX.id);
-    expect(munichMove.destination.id).toBe(MUNICH.id);
-  });
-
-  it("does not duplicate return legs for a single roundtrip trip", () => {
-    const returnsForVenice = legs.filter((l) => l.tripId === "venice-2022" && l.direction === "return");
-    expect(returnsForVenice).toHaveLength(1);
+    const munichMove = legs.filter((l) => l.journeyId === "munich-2022");
+    expect(munichMove).toHaveLength(1);
+    expect(munichMove[0].destination.id).toBe(MUNICH.id);
   });
 
   it("carries the known travel modes through unchanged and leaves the rest unresolved", () => {
-    const cruiseOut = legs.find((l) => l.id === "med-cruise-2010-out")!;
+    const cruiseOut = legs.find((l) => l.journeyId === "med-cruise-2010" && l.direction === "outbound")!;
     expect(cruiseOut.travelMode).toBe("boat");
 
-    const roadTripOut = legs.find((l) => l.id === "ireland-2016-out")!;
+    const roadTripOut = legs.find((l) => l.journeyId === "ireland-2016" && l.direction === "outbound")!;
     expect(roadTripOut.travelMode).toBe("automotive");
 
-    const londonOut = legs.find((l) => l.id === "london-2010-out")!;
+    const londonOut = legs.find((l) => l.journeyId === "london-2010" && l.direction === "outbound")!;
     expect(londonOut.travelMode).toBeUndefined();
   });
 
-  it("handles an empty trip list safely", () => {
+  it("does not create a synthetic hub-transition leg between journeys", () => {
+    // No leg should exist whose origin/destination pair isn't part of some journey's own
+    // origin -> stops -> (return) chain — i.e. every leg's journeyId must be a real journey.
+    const journeyIds = new Set(journeys.map((j) => j.id));
+    for (const leg of legs) {
+      expect(journeyIds.has(leg.journeyId)).toBe(true);
+    }
+  });
+
+  it("handles an empty journey list safely", () => {
     expect(buildRouteLegs([])).toEqual([]);
+  });
+});
+
+describe("buildRouteLegs — synthetic journeys", () => {
+  it("supports different travel modes for different legs within the same journey", () => {
+    const journey: Journey = {
+      id: "mixed-mode-journey",
+      order: 1,
+      origin: LAX,
+      start: { year: 2019 },
+      returnToOrigin: true,
+      returnTravelMode: "air",
+      stops: [
+        { location: TAIPEI, travelModeFromPrevious: "air" },
+        { location: SHENZHEN, travelModeFromPrevious: "train" },
+        { location: SHANGHAI, travelModeFromPrevious: "automotive" },
+      ],
+    };
+
+    const legs = buildRouteLegs([journey]);
+    expect(legs.map((l) => l.travelMode)).toEqual(["air", "train", "automotive", "air"]);
+  });
+
+  it("ends at the last stop without a return leg when returnToOrigin is false", () => {
+    const journey: Journey = {
+      id: "one-way",
+      order: 1,
+      origin: LAX,
+      start: { year: 2019 },
+      returnToOrigin: false,
+      stops: [{ location: TAIPEI }],
+    };
+
+    const legs = buildRouteLegs([journey]);
+    expect(legs).toHaveLength(1);
+    expect(legs[0].destination.id).toBe(TAIPEI.id);
   });
 });
