@@ -116,16 +116,16 @@ export function Contact() {
                 <h3 className="mb-4">Connect With Me</h3>
                 <div className="space-y-4">
                   <a
-                    href="mailto:hello@example.com"
+                    href="mailto:mrjrothman@gmail.com"
                     className="flex items-center gap-3 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
                   >
                     <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Mail size={20} className="text-[#1fa2ff]" />
                     </div>
-                    <span>hello@example.com</span>
+                    <span>mrjrothman@gmail.com</span>
                   </a>
                   <a
-                    href="https://linkedin.com"
+                    href="https://linkedin.com/in/jacob-rothman"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
@@ -136,7 +136,7 @@ export function Contact() {
                     <span>LinkedIn</span>
                   </a>
                   <a
-                    href="https://github.com"
+                    href="https://github.com/U-k-t"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-muted-foreground hover:text-[#1fa2ff] transition-colors"

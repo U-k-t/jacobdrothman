@@ -4,76 +4,89 @@ export function Resume() {
   const experience = [
     {
       title: "Senior Product Manager",
-      company: "Tech Company Inc.",
-      period: "2022 - Present",
+      company: "Infineon Technologies",
+      period: "Apr 2025 - Present",
       achievements: [
-        "Led product strategy for flagship B2B platform serving 100+ enterprise clients",
-        "Increased user retention by 35% through AI-powered feature development",
-        "Managed cross-functional team of 12 engineers, designers, and data analysts",
-        "Launched 3 major product initiatives generating $5M in new ARR",
+        "Launched AI infrastructure product solutions generating $30M+ revenue by translating customer requirements into roadmap, feature, and positioning decisions",
+        "Defined product strategy and prioritized customer-driven improvements that increased adoption 20%+ in a high-growth market",
+        "Improved internal CRM workflow adoption 30% by identifying stakeholder friction, standardizing processes, and enabling users across teams",
+        "Presented market and product priorities to senior leadership, informing division strategy and roadmap decisions",
       ],
     },
     {
-      title: "Product Manager",
-      company: "FinTech Startup",
-      period: "2020 - 2022",
+      title: "Product Manager II",
+      company: "Infineon Technologies",
+      period: "Apr 2024 - Mar 2025",
       achievements: [
-        "Drove mobile app redesign that increased DAU by 150%",
-        "Implemented data-driven A/B testing framework across all product teams",
-        "Reduced customer support tickets by 40% through UX improvements",
-        "Built and maintained product roadmap aligned with company OKRs",
+        "Led 3 product teams through roadmap prioritization and execution across $25M+ in annual revenue initiatives",
+        "Reallocated resources from underperforming segments to drive eight-figure incremental revenue growth",
+        "Prioritized roadmap initiatives across customer demand, technical feasibility, and revenue impact",
+      ],
+    },
+    {
+      title: "Product Manager I",
+      company: "Infineon Technologies",
+      period: "Dec 2022 - Mar 2024",
+      achievements: [
+        "Translated market requirements into 5 product concepts projecting $120M+ revenue, influencing roadmap prioritization",
+        "Analyzed funnel performance to identify conversion gaps, prioritize experiments, and guide product improvements",
+        "Conducted portfolio analysis to sunset underperforming features and prioritize high-ROI opportunities",
       ],
     },
     {
       title: "Associate Product Manager",
-      company: "E-commerce Platform",
-      period: "2018 - 2020",
+      company: "Infineon Technologies",
+      period: "Jun 2021 - Nov 2022",
       achievements: [
-        "Owned checkout flow optimization, increasing conversion rate by 22%",
-        "Conducted user research and competitive analysis for new market expansion",
-        "Collaborated with engineering to reduce page load times by 45%",
-        "Launched seller tools that onboarded 500+ new merchants",
+        "Built Python reporting automation, reducing manual analysis 10+ hours/week and improving performance tracking",
+        "Built KPI dashboards for 6 teams to track adoption, monitor product performance, and inform roadmap decisions",
+        "Synthesized customer and stakeholder interviews into product requirements and roadmap recommendations",
+      ],
+    },
+    {
+      title: "Co-Founder",
+      company: "Trusty (formerly Glacier)",
+      period: "Mar 2020 - Sep 2021",
+      achievements: [
+        "Co-founded B2B proptech marketplace for broker-sourced comparables, enabling listing discovery and purchase workflows",
+        "Led discovery-to-roadmap process, translating broker research into requirements, user stories, and prioritized feature concepts",
+        "Ran discovery experiments, A/B tests, and journey analysis to validate broker needs and guide product pivots",
+        "Led early GTM outreach, securing adopter validation and investor interest contributing to $1.2M VC funding",
       ],
     },
   ];
 
   const education = [
     {
-      degree: "MBA, Technology Management",
-      school: "University Name",
-      year: "2018",
-    },
-    {
-      degree: "BS, Computer Science",
-      school: "University Name",
-      year: "2014",
+      degree: "BS, Computer Science, Minor in Entrepreneurship and Business Management",
+      school: "California State Polytechnic University, Pomona",
+      year: "",
     },
   ];
 
   const skills = {
-    "Product Management": [
-      "Product Strategy",
-      "Roadmap Planning",
+    "Product": [
+      "Strategy",
+      "Roadmapping & Prioritization",
       "User Research",
-      "A/B Testing",
-      "Analytics",
-      "Agile/Scrum",
+      "Requirements",
+      "Stakeholder Management",
+      "Success Metrics",
     ],
     "Technical": [
-      "SQL",
       "Python",
       "JavaScript",
-      "React",
-      "APIs",
+      "API Design",
+      "Systems Design",
+      "Cloud (AWS, Azure, GCP)",
       "Git",
-    ],
-    "Tools": [
       "Jira",
-      "Figma",
-      "Mixpanel",
-      "Amplitude",
-      "Looker",
-      "Notion",
+    ],
+    "Data Analysis": [
+      "SQL",
+      "Excel",
+      "Dashboarding (Tableau, PowerBI)",
+      "Funnel Analysis",
     ],
   };
 
@@ -135,8 +148,12 @@ export function Resume() {
                     <h3 className="mb-1">{edu.degree}</h3>
                     <div className="flex items-center gap-2">
                       <span className="text-muted-foreground">{edu.school}</span>
-                      <span className="text-muted-foreground">•</span>
-                      <span className="text-sm text-muted-foreground">{edu.year}</span>
+                      {edu.year && (
+                        <>
+                          <span className="text-muted-foreground">•</span>
+                          <span className="text-sm text-muted-foreground">{edu.year}</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 ))}

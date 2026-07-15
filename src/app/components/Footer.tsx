@@ -6,11 +6,11 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground">
-            © {new Date().getFullYear()} Product Manager Portfolio
+            © {new Date().getFullYear()} Jacob Rothman
           </p>
           <div className="flex gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/U-k-t"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-[#1fa2ff] transition-colors"
@@ -19,7 +19,7 @@ export function Footer() {
               <Github size={20} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/jacob-rothman"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-[#1fa2ff] transition-colors"
@@ -28,7 +28,7 @@ export function Footer() {
               <Linkedin size={20} />
             </a>
             <a
-              href="mailto:hello@example.com"
+              href="mailto:mrjrothman@gmail.com"
               className="text-muted-foreground hover:text-[#1fa2ff] transition-colors"
               aria-label="Email"
             >

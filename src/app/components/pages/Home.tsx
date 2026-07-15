@@ -9,12 +9,12 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative">
           <div className="max-w-3xl">
             <h1 className="text-4xl lg:text-6xl mb-6 tracking-tight">
-              Product Manager
+              Jacob Rothman
               <br />
-              <span className="bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] bg-clip-text text-transparent">Building the future, one feature at a time</span>
+              <span className="bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] bg-clip-text text-transparent">Product Manager, AI Infrastructure & Technical Products</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-              Passionate about creating impactful products through user-centered design, data-driven decisions, and cross-functional collaboration.
+              Product Manager with a CS background and B2B marketplace startup experience, driving roadmap, customer requirements, analytics, and launches across AI infrastructure and technical products.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
