@@ -10,6 +10,9 @@ describe("Travel page", () => {
     // The accessible route summary (always rendered by TravelMap) proves the map mounted.
     expect(screen.getByRole("heading", { name: /travel route, in chronological order/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /replay travel animation/i })).toBeInTheDocument();
+    // Before the map has scrolled into view (the test env's IntersectionObserver stub never
+    // fires), the status area should already show Los Angeles rather than sitting blank.
+    expect(screen.getByText("Los Angeles")).toBeInTheDocument();
   });
 
   it("shows the complete route immediately for prefers-reduced-motion, without auto-animating", () => {
@@ -23,6 +26,7 @@ describe("Travel page", () => {
     render(<Travel />);
 
     // The route summary is always present regardless of motion preference.
-    expect(screen.getAllByText(/Returned to Los Angeles \(LAX\)/i).length).toBeGreaterThan(0);
+    const items = screen.getAllByRole("listitem");
+    expect(items.some((item) => item.textContent?.includes("to Los Angeles"))).toBe(true);
   });
 });

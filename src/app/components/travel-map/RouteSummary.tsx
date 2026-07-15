@@ -1,4 +1,5 @@
 import type { RouteLeg } from "./routeLegs";
+import { formatJourneyDate } from "./timing";
 import { getTravelModeLabel } from "./travelModes";
 
 interface RouteSummaryProps {
@@ -11,17 +12,18 @@ export function RouteSummary({ legs }: RouteSummaryProps) {
     <div className="sr-only">
       <h2>Travel route, in chronological order</h2>
       {legs.length === 0 ? (
-        <p>No trips to show yet.</p>
+        <p>No journeys to show yet.</p>
       ) : (
         <ol>
           {legs.map((leg) => (
             <li key={leg.id}>
               {leg.isRelocation
-                ? leg.label
+                ? `Moved from ${leg.origin.name} to ${leg.destination.name}`
                 : leg.direction === "outbound"
                   ? `Traveled from ${leg.origin.name} to ${leg.destination.name}`
                   : `Returned from ${leg.origin.name} to ${leg.destination.name}`}
-              {leg.year ? `, ${leg.year}` : ""} — travel mode: {getTravelModeLabel(leg.travelMode)}.
+              , {formatJourneyDate({ month: leg.month, year: leg.year })} — travel mode:{" "}
+              {getTravelModeLabel(leg.travelMode)}.
             </li>
           ))}
         </ol>

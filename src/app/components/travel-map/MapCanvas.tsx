@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
-import type { GeoPoint } from "../../data/travelLocations";
+import type { Location } from "../../data/travelLocations";
 import { MAP_VIEW_SIZE, project } from "./geo";
 import type { RouteLeg } from "./routeLegs";
 import { getTravelModeStyle } from "./travelModes";
@@ -7,11 +7,11 @@ import { WORLD_SILHOUETTE } from "./worldSilhouette";
 
 interface MapCanvasProps {
   legs: RouteLeg[];
-  /** -1 = nothing shown yet; legs.length = complete (all markers, no active line). */
+  /** -1 = animation not started yet (only the origin is shown); legs.length = complete. */
   activeLegIndex: number;
 }
 
-function coordKey(point: GeoPoint) {
+function coordKey(point: Location) {
   return `${point.lat.toFixed(2)},${point.lng.toFixed(2)}`;
 }
 
@@ -24,7 +24,12 @@ function legPathD(leg: RouteLeg) {
 export function MapCanvas({ legs, activeLegIndex }: MapCanvasProps) {
   const { width, height } = MAP_VIEW_SIZE;
 
-  const visitedPoints = new Map<string, GeoPoint>();
+  const visitedPoints = new Map<string, Location>();
+  // The starting point (Los Angeles) is always shown immediately, even before the
+  // animation begins — it should never animate into existence from nowhere.
+  if (legs.length > 0) {
+    visitedPoints.set(coordKey(legs[0].origin), legs[0].origin);
+  }
   for (let i = 0; i <= activeLegIndex && i < legs.length; i++) {
     visitedPoints.set(coordKey(legs[i].origin), legs[i].origin);
     visitedPoints.set(coordKey(legs[i].destination), legs[i].destination);
@@ -32,7 +37,8 @@ export function MapCanvas({ legs, activeLegIndex }: MapCanvasProps) {
 
   const activeLeg = activeLegIndex >= 0 && activeLegIndex < legs.length ? legs[activeLegIndex] : null;
   const activeStyle = activeLeg ? getTravelModeStyle(activeLeg.travelMode) : null;
-  const currentPointKey = activeLeg ? coordKey(activeLeg.destination) : null;
+  // Before the first leg starts, the "current" location is the journey's starting point.
+  const currentPointKey = activeLeg ? coordKey(activeLeg.destination) : legs.length > 0 ? coordKey(legs[0].origin) : null;
 
   return (
     <svg

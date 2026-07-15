@@ -1,96 +1,74 @@
-import { LAX, type GeoPoint, type TravelMode } from "../../data/travelLocations";
-import type { Trip } from "../../data/travelTrips";
+import type { Location, TravelMode } from "../../data/travelLocations";
+import type { Journey } from "../../data/travelJourneys";
 
 export interface RouteLeg {
   id: string;
   /** Sequential animation order across the whole generated route. */
   order: number;
-  origin: GeoPoint;
-  destination: GeoPoint;
+  origin: Location;
+  destination: Location;
   travelMode?: TravelMode;
   direction: "outbound" | "return";
-  /** True for one-way relocations (initial hub moves, or auto-inserted hub-exit transitions). */
+  /** True only for the final leg of a journey that does not return to its origin. */
   isRelocation: boolean;
-  /** Which authored trip this leg belongs to. */
-  tripId: string;
+  /** Which authored journey this leg belongs to. */
+  journeyId: string;
   label: string;
-  year?: string;
+  month?: number;
+  year: number;
 }
 
 /**
- * Derives every animated route leg from the authored trip list. Nothing here is
- * hand-duplicated: "roundtrip" trips produce an outbound + return leg pair, "move"
- * trips produce a single one-way leg, and whenever a trip's declared home base
- * differs from the currently-active one, a hub-transition leg is generated
- * automatically (this is what produces "Villach -> LAX" and "Munich -> LAX").
+ * Derives every animated route leg from the authored journey list. A journey's stops are
+ * visited in order (origin -> stop 1 -> stop 2 -> ... -> last stop), and a return leg back
+ * to the origin is generated *only* when `returnToOrigin` is true — never inferred or
+ * defaulted. Journeys are otherwise independent: no synthetic "transition" leg is created
+ * between one journey's end and the next journey's origin, even if they differ (e.g. the
+ * next journey starting fresh from LAX after a Munich-based trip) — the animation layer
+ * treats that origin as already-current rather than fabricating an untracked transition.
  */
-export function buildRouteLegs(trips: Trip[]): RouteLeg[] {
+export function buildRouteLegs(journeys: Journey[]): RouteLeg[] {
   const legs: RouteLeg[] = [];
-  let effectiveHub: GeoPoint = LAX;
   let order = 0;
   const nextOrder = () => ++order;
 
-  for (const trip of trips) {
-    if (trip.hub.id !== effectiveHub.id) {
-      legs.push({
-        id: `transition-${effectiveHub.id}-to-${trip.hub.id}-before-${trip.id}`,
-        order: nextOrder(),
-        origin: effectiveHub,
-        destination: trip.hub,
-        travelMode: undefined,
-        direction: "outbound",
-        isRelocation: true,
-        tripId: trip.id,
-        label:
-          trip.hub.id === LAX.id
-            ? `Returned to ${trip.hub.name}`
-            : `Relocated to ${trip.hub.name}`,
-        year: trip.year,
-      });
-      effectiveHub = trip.hub;
-    }
+  for (const journey of journeys) {
+    const isOneWay = !journey.returnToOrigin;
+    let previous: Location = journey.origin;
 
-    if (trip.kind === "move") {
+    journey.stops.forEach((stop, index) => {
+      const isLastStop = index === journey.stops.length - 1;
       legs.push({
-        id: `move-${trip.id}`,
+        id: `${journey.id}-leg-${index}`,
         order: nextOrder(),
-        origin: effectiveHub,
-        destination: trip.destination,
-        travelMode: trip.travelMode,
+        origin: previous,
+        destination: stop.location,
+        travelMode: stop.travelModeFromPrevious,
         direction: "outbound",
-        isRelocation: true,
-        tripId: trip.id,
-        label: trip.caption ?? `Moved to ${trip.destination.name}`,
-        year: trip.year,
+        isRelocation: isOneWay && isLastStop,
+        journeyId: journey.id,
+        label: stop.location.name,
+        month: stop.month ?? journey.start.month,
+        year: stop.year ?? journey.start.year,
       });
-      effectiveHub = trip.destination;
-      continue;
-    }
+      previous = stop.location;
+    });
 
-    legs.push({
-      id: `${trip.id}-out`,
-      order: nextOrder(),
-      origin: trip.hub,
-      destination: trip.destination,
-      travelMode: trip.travelMode,
-      direction: "outbound",
-      isRelocation: false,
-      tripId: trip.id,
-      label: trip.destination.name,
-      year: trip.year,
-    });
-    legs.push({
-      id: `${trip.id}-return`,
-      order: nextOrder(),
-      origin: trip.destination,
-      destination: trip.hub,
-      travelMode: trip.travelMode,
-      direction: "return",
-      isRelocation: false,
-      tripId: trip.id,
-      label: `Returned to ${trip.hub.name}`,
-      year: trip.year,
-    });
+    if (journey.returnToOrigin) {
+      legs.push({
+        id: `${journey.id}-return`,
+        order: nextOrder(),
+        origin: previous,
+        destination: journey.origin,
+        travelMode: journey.returnTravelMode,
+        direction: "return",
+        isRelocation: false,
+        journeyId: journey.id,
+        label: `Returned to ${journey.origin.name}`,
+        month: journey.start.month,
+        year: journey.start.year,
+      });
+    }
   }
 
   return legs;
