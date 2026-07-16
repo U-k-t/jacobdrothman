@@ -1,7 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { journeys } from "../../data/travelJourneys";
-import { LAX } from "../../data/travelLocations";
+import { SOUTHERN_CALIFORNIA } from "../../data/travelLocations";
 import { buildRouteLegs } from "./routeLegs";
 import type { RouteLeg } from "./routeLegs";
 import { computeGapPauseMs, TIMING_CONFIG } from "./timing";
@@ -175,7 +175,7 @@ describe("useTravelMapAnimation", () => {
     expect(screen.getByTestId("active-leg-index").textContent).toBe("3");
   });
 
-  it("replay resets to Los Angeles and restarts at LAX -> Ensenada using the real dataset", () => {
+  it("replay resets to Southern California and restarts at Southern California -> Kauai using the real dataset", () => {
     const legs = buildRouteLegs(journeys);
     render(<Harness legs={legs} />);
     const observer = MockIntersectionObserver.instances[0];
@@ -183,8 +183,8 @@ describe("useTravelMapAnimation", () => {
     act(() => observer.callback([{ isIntersecting: true }]));
     act(() => vi.advanceTimersByTime(0));
     expect(screen.getByTestId("active-leg-index").textContent).toBe("0");
-    expect(legs[0].origin.id).toBe(LAX.id);
-    expect(legs[0].destination.name).toBe("Ensenada");
+    expect(legs[0].origin.id).toBe(SOUTHERN_CALIFORNIA.id);
+    expect(legs[0].destination.name).toBe("Kauai");
 
     // Advance a bit further into the animation...
     act(() => vi.advanceTimersByTime(TIMING_CONFIG.legDurationMs + TIMING_CONFIG.dwellMs + TIMING_CONFIG.maxGapPauseMs));
@@ -219,6 +219,31 @@ describe("useTravelMapAnimation", () => {
     });
     act(() => vi.advanceTimersByTime(0));
     expect(screen.getByTestId("active-leg-index").textContent).toBe("0");
+  });
+
+  it("ignores a stale timer callback invoked directly, even outside the normal clearTimeout path", () => {
+    const legs = [makeLeg({ id: "l1" }), makeLeg({ id: "l2" }), makeLeg({ id: "l3" })];
+    const setTimeoutSpy = vi.spyOn(window, "setTimeout");
+    render(<Harness legs={legs} />);
+    const observer = MockIntersectionObserver.instances[0];
+
+    act(() => observer.callback([{ isIntersecting: true }]));
+    act(() => vi.advanceTimersByTime(0));
+    expect(screen.getByTestId("active-leg-index").textContent).toBe("0");
+
+    // Capture the callback scheduled to advance from leg 0 to leg 1, before it ever fires.
+    const scheduledCall = setTimeoutSpy.mock.calls.at(-1);
+    const staleCallback = scheduledCall?.[0] as () => void;
+
+    // Replay before that timer fires — the run-id token it carries is now invalid.
+    const replayButton = screen.getByText("Replay trips");
+    act(() => replayButton.click());
+    expect(screen.getByTestId("active-leg-index").textContent).toBe("-1");
+
+    // Manually invoke the captured stale callback directly, bypassing clearTimeout entirely —
+    // simulating a callback reference firing out of band. It must be a no-op.
+    act(() => staleCallback());
+    expect(screen.getByTestId("active-leg-index").textContent).toBe("-1");
   });
 
   it("shows the complete state immediately when prefers-reduced-motion is set, without timers", () => {
