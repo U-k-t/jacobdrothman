@@ -1,37 +1,36 @@
 import { MapPin } from "lucide-react";
+import { useMemo } from "react";
+import { journeys, type Journey } from "../../data/travelJourneys";
 import { TravelMap } from "../TravelMap";
 
+/** Unique stop names in visit order (a stop like "Rome" revisited later collapses to one label). */
+function uniqueStopNames(journey: Journey): string[] {
+  return Array.from(new Set(journey.stops.map((stop) => stop.location.name)));
+}
+
+function journeyLabel(journey: Journey): string {
+  const base = uniqueStopNames(journey).join(" & ");
+  return journey.caption ? `${base} (${journey.caption})` : base;
+}
+
+/**
+ * Year-grouped display chips, derived directly from the same `journeys` dataset that drives
+ * the animated map — not a hand-maintained duplicate — so this list can't drift from the map.
+ */
+function buildTimeline(source: Journey[]) {
+  const byYear = new Map<number, string[]>();
+  for (const journey of source) {
+    const places = byYear.get(journey.start.year) ?? [];
+    places.push(journeyLabel(journey));
+    byYear.set(journey.start.year, places);
+  }
+  return Array.from(byYear.entries())
+    .sort((a, b) => b[0] - a[0])
+    .map(([year, places]) => ({ year: String(year), places }));
+}
+
 export function Travel() {
-  const timeline = [
-    { year: "2026", places: ["Zurich", "Rome"] },
-    { year: "2025", places: ["California Central Coast"] },
-    { year: "2024", places: ["Taipei, Shenzhen & Shanghai", "Shanghai & Taipei"] },
-    { year: "2023", places: ["Taipei", "Tokyo, Kyoto & Osaka"] },
-    {
-      year: "2022",
-      places: [
-        "Ljubljana",
-        "Venice",
-        "Salzburg & Hallstatt",
-        "Munich, Germany — moved for work",
-        "Madrid",
-        "Amsterdam",
-        "Berlin",
-        "Turin",
-        "Budapest",
-        "Geneva & Lyon",
-        "Barcelona",
-        "Prague",
-      ],
-    },
-    { year: "2021", places: ["Villach, Austria — moved for work", "Vienna", "Florence"] },
-    { year: "2016", places: ["Ireland (road trip)"] },
-    { year: "2015", places: ["Seattle", "Alaska Cruise (+ Canada)"] },
-    { year: "2014", places: ["New England (college tour)", "Puerto Rico", "Caribbean Cruise"] },
-    { year: "2013", places: ["Caribbean Cruise"] },
-    { year: "2010", places: ["London", "Paris", "Rome", "Mediterranean Cruise"] },
-    { year: "2006", places: ["Ensenada, Mexico"] },
-  ];
+  const timeline = useMemo(() => buildTimeline(journeys), []);
 
   return (
     <div className="min-h-[calc(100vh-theme(spacing.16))]">
@@ -62,9 +61,9 @@ export function Travel() {
                   <div className="flex-1">
                     <h3 className="mb-2">{entry.year}</h3>
                     <div className="flex flex-wrap gap-2">
-                      {entry.places.map((place) => (
+                      {entry.places.map((place, index) => (
                         <span
-                          key={place}
+                          key={`${entry.year}-${index}-${place}`}
                           className="bg-accent px-3 py-1 rounded-full text-sm text-muted-foreground"
                         >
                           {place}

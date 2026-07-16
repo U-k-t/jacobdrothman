@@ -17,16 +17,22 @@ const leg: RouteLeg = {
 };
 
 describe("DestinationCaption", () => {
-  it("shows the destination name, date, and travel mode while a leg is active", () => {
+  it("is visually hidden (sr-only) — movement is communicated through the map, not visible text", () => {
+    const { container } = render(<DestinationCaption activeLeg={leg} />);
+    const region = container.querySelector("p");
+    expect(region).toHaveClass("sr-only");
+  });
+
+  it("announces the destination name, date, and travel mode while a leg is active, for screen readers", () => {
     render(<DestinationCaption activeLeg={leg} />);
-    expect(screen.getByText("Vienna")).toBeInTheDocument();
-    expect(screen.getByText("2021")).toBeInTheDocument();
-    expect(screen.getByText(/Travel mode: Not yet recorded/)).toBeInTheDocument();
+    expect(screen.getByText(/Vienna/)).toBeInTheDocument();
+    expect(screen.getByText(/2021/)).toBeInTheDocument();
+    expect(screen.getByText(/travel mode: Not yet recorded/)).toBeInTheDocument();
   });
 
   it("shows a real month alongside the year when known", () => {
     render(<DestinationCaption activeLeg={{ ...leg, month: 3 }} />);
-    expect(screen.getByText("March 2021")).toBeInTheDocument();
+    expect(screen.getByText(/March 2021/)).toBeInTheDocument();
   });
 
   it("never fabricates a month when only the year is known", () => {
@@ -36,13 +42,19 @@ describe("DestinationCaption", () => {
 
   it("shows the resolved travel mode when known", () => {
     render(<DestinationCaption activeLeg={{ ...leg, travelMode: "boat" }} />);
-    expect(screen.getByText(/Travel mode: Boat/)).toBeInTheDocument();
+    expect(screen.getByText(/travel mode: Boat/)).toBeInTheDocument();
   });
 
-  it("shows the starting location before the first leg begins, without a date", () => {
-    render(<DestinationCaption activeLeg={null} initialLocationName="Los Angeles" />);
-    expect(screen.getByText("Los Angeles")).toBeInTheDocument();
+  it("uses aria-live so the announcement updates as the animation progresses", () => {
+    const { container } = render(<DestinationCaption activeLeg={leg} />);
+    expect(container.querySelector("[aria-live='polite']")).toBeInTheDocument();
+  });
+
+  it("announces the starting location before the first leg begins, without a date", () => {
+    const { container } = render(<DestinationCaption activeLeg={null} initialLocationName="Southern California" />);
+    expect(screen.getByText("Southern California")).toBeInTheDocument();
     expect(screen.queryByText(/Travel mode/)).not.toBeInTheDocument();
+    expect(container.querySelector("p")).toHaveClass("sr-only");
   });
 
   it("renders nothing once complete (no active leg, no initial location)", () => {

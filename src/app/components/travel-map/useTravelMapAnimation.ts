@@ -47,6 +47,11 @@ export function useTravelMapAnimation({ legs }: UseTravelMapAnimationOptions): U
   const legCount = legs.length;
   const containerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<number | null>(null);
+  // Incremented every time a step is (re)scheduled, on replay, and on unmount. A scheduled
+  // callback captures the token it was issued and checks it before touching state, so a stale
+  // callback reference invoked out of band (not just one cancelled via clearTimeout) can never
+  // resurrect a previous leg. Belt-and-suspenders alongside clearPendingTimeout below.
+  const runIdRef = useRef(0);
   const [isReducedMotion, setIsReducedMotion] = useState(() =>
     typeof window !== "undefined" && typeof window.matchMedia === "function"
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -110,7 +115,12 @@ export function useTravelMapAnimation({ legs }: UseTravelMapAnimationOptions): U
 
     const nextIndex = activeLegIndex + 1;
     const delay = activeLegIndex < 0 ? 0 : delayBeforeLeg(legs, nextIndex);
+    const runId = ++runIdRef.current;
     timeoutRef.current = window.setTimeout(() => {
+      // Stale-callback guard: if a newer step (or replay) has been scheduled since this
+      // timeout was created, runIdRef.current will have moved on — ignore this callback
+      // even if something invoked it outside of the normal clearTimeout path.
+      if (runIdRef.current !== runId) return;
       setActiveLegIndex((prev) => Math.min(prev + 1, legCount));
     }, delay);
 
@@ -118,11 +128,14 @@ export function useTravelMapAnimation({ legs }: UseTravelMapAnimationOptions): U
   }, [hasStarted, isReducedMotion, legCount, activeLegIndex, legs, clearPendingTimeout]);
 
   const replay = useCallback(() => {
-    // Deliberately does not touch the timer directly: the step-timer effect above
-    // already clears-and-reschedules on every activeLegIndex change, which is the
-    // single source of truth for "no overlapping timers." Clearing here too would
-    // risk cancelling that effect's own pending kickoff timer without anything left
-    // to reschedule it, if replay() fires again before state actually changes.
+    // Deliberately does not touch the timer or runIdRef directly: the step-timer effect
+    // above already clears-and-reschedules (bumping runIdRef itself) on every actual
+    // activeLegIndex change, which is the single source of truth for "no overlapping
+    // timers." Bumping runIdRef here unconditionally would invalidate a still-pending,
+    // still-valid timer whenever replay() is called more than once in the same tick
+    // without the resulting state actually changing (React bails out of re-rendering,
+    // so the effect never reruns to reschedule) — the effect-owned bump is sufficient
+    // because it only ever fires when a timer is genuinely superseded.
     if (isReducedMotion) {
       setHasStarted(true);
       setActiveLegIndex(legCount);
@@ -131,6 +144,12 @@ export function useTravelMapAnimation({ legs }: UseTravelMapAnimationOptions): U
     setHasStarted(true);
     setActiveLegIndex(-1);
   }, [isReducedMotion, legCount]);
+
+  useEffect(() => {
+    return () => {
+      runIdRef.current++;
+    };
+  }, []);
 
   return {
     containerRef,

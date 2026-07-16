@@ -7,7 +7,7 @@ const legs: RouteLeg[] = [
   {
     id: "ensenada-2006-leg-0",
     order: 1,
-    origin: { id: "lax", name: "Los Angeles", country: "United States", lat: 33.94, lng: -118.4 },
+    origin: { id: "southern-california", name: "Southern California", country: "United States", lat: 33.94, lng: -118.4 },
     destination: { id: "ensenada", name: "Ensenada", country: "Mexico", lat: 31.87, lng: -116.62 },
     travelMode: undefined,
     direction: "outbound",
@@ -20,18 +20,18 @@ const legs: RouteLeg[] = [
     id: "ensenada-2006-return",
     order: 2,
     origin: { id: "ensenada", name: "Ensenada", country: "Mexico", lat: 31.87, lng: -116.62 },
-    destination: { id: "lax", name: "Los Angeles", country: "United States", lat: 33.94, lng: -118.4 },
+    destination: { id: "southern-california", name: "Southern California", country: "United States", lat: 33.94, lng: -118.4 },
     travelMode: undefined,
     direction: "return",
     isRelocation: false,
     journeyId: "ensenada-2006",
-    label: "Returned to Los Angeles",
+    label: "Returned to Southern California",
     year: 2006,
   },
   {
     id: "villach-2021-leg-0",
     order: 3,
-    origin: { id: "lax", name: "Los Angeles", country: "United States", lat: 33.94, lng: -118.4 },
+    origin: { id: "southern-california", name: "Southern California", country: "United States", lat: 33.94, lng: -118.4 },
     destination: { id: "villach", name: "Villach", country: "Austria", lat: 46.61, lng: 13.85 },
     travelMode: undefined,
     direction: "outbound",
@@ -57,7 +57,7 @@ describe("RouteSummary", () => {
   it("describes a one-way relocation leg distinctly from a round-trip leg", () => {
     render(<RouteSummary legs={legs} />);
     const items = screen.getAllByRole("listitem");
-    expect(items[2].textContent).toContain("Moved from Los Angeles to Villach");
+    expect(items[2].textContent).toContain("Moved from Southern California to Villach");
   });
 
   it("handles an empty leg list without crashing", () => {

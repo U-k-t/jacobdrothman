@@ -4,31 +4,31 @@ import { getTravelModeLabel } from "./travelModes";
 
 interface DestinationCaptionProps {
   activeLeg: RouteLeg | null;
-  /** Shown only before the first leg begins, so the status area is never blank on load. */
+  /** Announced only before the first leg begins, so assistive tech isn't left silent on load. */
   initialLocationName?: string;
 }
 
-/** Shows only the active leg's destination name, date, and travel mode — nothing else. */
+/**
+ * Screen-reader-only live announcement of the active leg's destination, date, and travel mode.
+ * Movement is communicated visually through the map's points and path, not visible text — this
+ * region has no visual footprint (no space reserved for it) but keeps assistive tech informed of
+ * progress in real time, alongside (not instead of) the always-present `RouteSummary`.
+ */
 export function DestinationCaption({ activeLeg, initialLocationName }: DestinationCaptionProps) {
   if (activeLeg) {
     return (
-      <div className="mt-4 text-center" aria-live="polite">
-        <p className="text-sm text-foreground">{activeLeg.destination.name}</p>
-        <p className="text-xs text-muted-foreground mt-1">
-          {formatJourneyDate({ month: activeLeg.month, year: activeLeg.year })}
-        </p>
-        <p className="text-xs text-muted-foreground mt-1">
-          Travel mode: {getTravelModeLabel(activeLeg.travelMode)}
-        </p>
-      </div>
+      <p className="sr-only" aria-live="polite">
+        {activeLeg.destination.name}, {formatJourneyDate({ month: activeLeg.month, year: activeLeg.year })} —
+        travel mode: {getTravelModeLabel(activeLeg.travelMode)}.
+      </p>
     );
   }
 
   if (initialLocationName) {
     return (
-      <div className="mt-4 text-center" aria-live="polite">
-        <p className="text-sm text-foreground">{initialLocationName}</p>
-      </div>
+      <p className="sr-only" aria-live="polite">
+        {initialLocationName}
+      </p>
     );
   }
 

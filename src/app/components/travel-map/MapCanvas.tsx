@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import type { Location } from "../../data/travelLocations";
 import { MAP_VIEW_SIZE, project } from "./geo";
 import type { RouteLeg } from "./routeLegs";
@@ -25,7 +25,7 @@ export function MapCanvas({ legs, activeLegIndex }: MapCanvasProps) {
   const { width, height } = MAP_VIEW_SIZE;
 
   const visitedPoints = new Map<string, Location>();
-  // The starting point (Los Angeles) is always shown immediately, even before the
+  // The starting point (Southern California) is always shown immediately, even before the
   // animation begins — it should never animate into existence from nowhere.
   if (legs.length > 0) {
     visitedPoints.set(coordKey(legs[0].origin), legs[0].origin);
@@ -44,7 +44,7 @@ export function MapCanvas({ legs, activeLegIndex }: MapCanvasProps) {
     <svg
       viewBox={`0 0 ${width} ${height}`}
       className="w-full h-auto relative z-10"
-      style={{ maxHeight: "420px" }}
+      style={{ maxHeight: "560px" }}
       aria-hidden="true"
     >
       <g className="fill-muted-foreground/10">
@@ -96,24 +96,29 @@ export function MapCanvas({ legs, activeLegIndex }: MapCanvasProps) {
         })}
       </g>
 
-      <AnimatePresence mode="wait">
-        {activeLeg && activeStyle && (
-          <motion.path
-            key={activeLeg.id}
-            data-testid="active-route-path"
-            d={legPathD(activeLeg)}
-            fill="none"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeDasharray={activeStyle.dashed ? "6 4" : undefined}
-            className={activeStyle.strokeClassName}
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.9 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-          />
-        )}
-      </AnimatePresence>
+      {/*
+        Deliberately NOT wrapped in AnimatePresence/exit: an exit animation keeps the
+        previous leg's path mounted (fading) for the duration of its exit transition, which
+        raced with the step timer's own pacing and left stale paths visible on screen — see
+        plan.md ("Stale-Path Fix"). Keying by the leg's unique id means React unmounts the old
+        path and mounts the new one in the same commit: only the current leg's path ever
+        exists, even when two consecutive legs share identical geometry or mode.
+      */}
+      {activeLeg && activeStyle && (
+        <motion.path
+          key={activeLeg.id}
+          data-testid="active-route-path"
+          d={legPathD(activeLeg)}
+          fill="none"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeDasharray={activeStyle.dashed ? "6 4" : undefined}
+          className={activeStyle.strokeClassName}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.9 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        />
+      )}
     </svg>
   );
 }
