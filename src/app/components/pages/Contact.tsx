@@ -56,7 +56,7 @@ export function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1fa2ff]/30"
+                      className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand/30"
                       placeholder="Your name"
                     />
                   </div>
@@ -71,7 +71,7 @@ export function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1fa2ff]/30"
+                      className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand/30"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -88,7 +88,7 @@ export function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1fa2ff]/30"
+                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand/30"
                     placeholder="What's this about?"
                   />
                 </div>
@@ -104,14 +104,14 @@ export function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1fa2ff]/30 resize-none"
+                    className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand/30 resize-none"
                     placeholder="Tell me more..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-[#1fa2ff]/25 transition-all"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-brand to-brand-soft text-white px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-brand/25 transition-all"
                 >
                   <Send size={20} />
                   Send Message
@@ -125,10 +125,10 @@ export function Contact() {
                 <div className="space-y-4">
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="flex items-center gap-3 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="flex items-center gap-3 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail size={20} className="text-[#1fa2ff]" />
+                    <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Mail size={20} className="text-brand-strong" />
                     </div>
                     <span>Email</span>
                   </a>
@@ -136,10 +136,10 @@ export function Contact() {
                     href="https://linkedin.com/in/jacob-rothman"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="flex items-center gap-3 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Linkedin size={20} className="text-[#1fa2ff]" />
+                    <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Linkedin size={20} className="text-brand-strong" />
                     </div>
                     <span>LinkedIn</span>
                   </a>
@@ -147,10 +147,10 @@ export function Contact() {
                     href="https://github.com/U-k-t"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="flex items-center gap-3 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Github size={20} className="text-[#1fa2ff]" />
+                    <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Github size={20} className="text-brand-strong" />
                     </div>
                     <span>GitHub</span>
                   </a>

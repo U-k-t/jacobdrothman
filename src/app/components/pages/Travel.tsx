@@ -52,11 +52,11 @@ export function Travel() {
             {timeline.map((entry) => (
               <div
                 key={entry.year}
-                className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-[#1fa2ff]/30 transition-all"
+                className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-brand/30 transition-all"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-[#1fa2ff]" size={20} />
+                  <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="text-brand-strong" size={20} />
                   </div>
                   <div className="flex-1">
                     <h3 className="mb-2">{entry.year}</h3>

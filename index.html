@@ -1,9 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-brand="a">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var params = new URLSearchParams(window.location.search);
+        var brandParam = params.get("brand");
+
+        if (brandParam === "a" || brandParam === "b") {
+          try {
+            localStorage.setItem("brand", brandParam);
+          } catch (e) {}
+        }
+
+        var brand = brandParam === "a" || brandParam === "b" ? brandParam : null;
+        if (!brand) {
+          try {
+            var stored = localStorage.getItem("brand");
+            brand = stored === "b" ? "b" : "a";
+          } catch (e) {
+            brand = "a";
+          }
+        }
+        root.setAttribute("data-brand", brand);
+
+        try {
+          if (localStorage.getItem("darkMode") === "true") {
+            root.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>Jacob Rothman | Product Manager</title>
     <meta name="description" content="Jacob Rothman is a Product Manager with a CS background, focused on roadmap strategy, customer discovery, and data-informed product launches for B2B and technical platforms." />
     <meta property="og:type" content="website" />

@@ -15,20 +15,20 @@ export function Portfolio() {
           <div className="space-y-6">
             <Link
               to="/portfolio/product-case-studies"
-              className="group block bg-card border border-border rounded-lg p-8 hover:shadow-lg hover:border-[#1fa2ff]/30 transition-all"
+              className="group block bg-card border border-border rounded-lg p-8 hover:shadow-lg hover:border-brand/30 transition-all"
             >
               <div className="flex items-start gap-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                  <Briefcase className="text-[#1fa2ff]" size={28} />
+                <div className="w-14 h-14 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Briefcase className="text-brand-strong" size={28} />
                 </div>
                 <div className="flex-1">
-                  <h2 className="mb-3 group-hover:text-[#1fa2ff] transition-colors">
+                  <h2 className="mb-3 group-hover:text-brand-strong transition-colors">
                     Product Case Studies
                   </h2>
                   <p className="text-muted-foreground mb-4">
                     Deep dives into product launches, feature development, and strategic initiatives. See how I've driven product success from concept to delivery.
                   </p>
-                  <span className="text-[#1fa2ff] group-hover:underline">
+                  <span className="text-brand-strong group-hover:underline">
                     View case studies →
                   </span>
                 </div>
@@ -37,20 +37,20 @@ export function Portfolio() {
 
             <Link
               to="/portfolio/process-improvement"
-              className="group block bg-card border border-border rounded-lg p-8 hover:shadow-lg hover:border-[#1fa2ff]/30 transition-all"
+              className="group block bg-card border border-border rounded-lg p-8 hover:shadow-lg hover:border-brand/30 transition-all"
             >
               <div className="flex items-start gap-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="text-[#1fa2ff]" size={28} />
+                <div className="w-14 h-14 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <TrendingUp className="text-brand-strong" size={28} />
                 </div>
                 <div className="flex-1">
-                  <h2 className="mb-3 group-hover:text-[#1fa2ff] transition-colors">
+                  <h2 className="mb-3 group-hover:text-brand-strong transition-colors">
                     Process Improvement
                   </h2>
                   <p className="text-muted-foreground mb-4">
                     How I've streamlined workflows, implemented agile practices, and fostered collaboration across teams to increase velocity and quality.
                   </p>
-                  <span className="text-[#1fa2ff] group-hover:underline">
+                  <span className="text-brand-strong group-hover:underline">
                     Explore improvements →
                   </span>
                 </div>

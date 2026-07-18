@@ -2,6 +2,14 @@
 
 :root {
   --font-size: 16px;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --radius: 0.625rem;
+}
+
+/* Brand A — "Azure" (current production theme) */
+
+[data-brand="a"] {
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
   --card: #ffffff;
@@ -22,15 +30,12 @@
   --input: transparent;
   --input-background: #f3f3f5;
   --switch-background: #cbced4;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: #030213;
@@ -39,17 +44,25 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --brand-blue: #1fa2ff;
-  --brand-blue-light: #60b8ff;
-  --brand-blue-dark: #0d8ae6;
-  --travel-mode-air: var(--brand-blue);
+  --brand: #1fa2ff;
+  --brand-strong: #0d8ae6;
+  --brand-soft: #60b8ff;
+  --brand-on-dark: #1fa2ff;
+  --signal: #14b8a6;
+  --ink: #0a1b2e;
+  --slate: #5a6b80;
+  --surface-tint: #eaf5ff;
+  --travel-mode-air: var(--brand);
   --travel-mode-boat: #14b8a6;
   --travel-mode-train: #f59e0b;
   --travel-mode-automotive: #8b5cf6;
   --travel-mode-unresolved: var(--muted-foreground);
+  --font-display: "IBM Plex Sans", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 
-.dark {
+[data-brand="a"].dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -68,9 +81,9 @@
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
+  --input-background: oklch(0.269 0 0);
+  --switch-background: oklch(0.439 0 0);
   --ring: oklch(0.439 0 0);
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -84,12 +97,122 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
-  --brand-blue: #1fa2ff;
-  --brand-blue-light: #60b8ff;
-  --brand-blue-dark: #0d8ae6;
-  --travel-mode-air: var(--brand-blue);
+  --brand: #1fa2ff;
+  --brand-strong: #1fa2ff;
+  --brand-soft: #60b8ff;
+  --brand-on-dark: #1fa2ff;
+  --signal: #14b8a6;
+  --ink: oklch(0.985 0 0);
+  --slate: oklch(0.708 0 0);
+  --surface-tint: oklch(0.269 0 0);
+  --travel-mode-air: var(--brand);
   --travel-mode-boat: #14b8a6;
   --travel-mode-train: #f59e0b;
+  --travel-mode-automotive: #8b5cf6;
+  --travel-mode-unresolved: var(--muted-foreground);
+}
+
+/* Brand B — "Ink & Amber" (round-one style-guide direction, see BRAND-HANDOVER.md) */
+
+[data-brand="b"] {
+  --background: #ffffff;
+  --foreground: #101c2e;
+  --card: #ffffff;
+  --card-foreground: #101c2e;
+  --popover: #ffffff;
+  --popover-foreground: #101c2e;
+  --primary: #1d4e89;
+  --primary-foreground: #ffffff;
+  --secondary: #f2f4f7;
+  --secondary-foreground: #101c2e;
+  --muted: #f2f4f7;
+  --muted-foreground: #647084;
+  --accent: #f2f4f7;
+  --accent-foreground: #1d4e89;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(16, 28, 46, 0.1);
+  --input: transparent;
+  --input-background: #f2f4f7;
+  --switch-background: #cbced4;
+  --ring: #1d4e89;
+  --chart-1: #1d4e89;
+  --chart-2: #7fb2e5;
+  --chart-3: #f0a32e;
+  --chart-4: #647084;
+  --chart-5: #17406f;
+  --sidebar: #f2f4f7;
+  --sidebar-foreground: #101c2e;
+  --sidebar-primary: #1d4e89;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffffff;
+  --sidebar-accent-foreground: #1d4e89;
+  --sidebar-border: rgba(16, 28, 46, 0.1);
+  --sidebar-ring: #1d4e89;
+  --brand: #1d4e89;
+  --brand-strong: #1d4e89;
+  --brand-soft: #7fb2e5;
+  --brand-on-dark: #7fb2e5;
+  --signal: #f0a32e;
+  --ink: #101c2e;
+  --slate: #647084;
+  --surface-tint: #f2f4f7;
+  --travel-mode-air: var(--brand);
+  --travel-mode-boat: #14b8a6;
+  --travel-mode-train: var(--signal);
+  --travel-mode-automotive: #8b5cf6;
+  --travel-mode-unresolved: var(--muted-foreground);
+  --font-display: "Source Serif 4", serif;
+  --font-body: "Public Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+[data-brand="b"].dark {
+  --background: #101c2e;
+  --foreground: #f2f4f7;
+  --card: #16243a;
+  --card-foreground: #f2f4f7;
+  --popover: #16243a;
+  --popover-foreground: #f2f4f7;
+  --primary: #7fb2e5;
+  --primary-foreground: #101c2e;
+  --secondary: #17406f;
+  --secondary-foreground: #f2f4f7;
+  --muted: #16243a;
+  --muted-foreground: #8a95a8;
+  --accent: #17406f;
+  --accent-foreground: #7fb2e5;
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: rgba(242, 244, 247, 0.1);
+  --input: #16243a;
+  --input-background: #16243a;
+  --switch-background: #17406f;
+  --ring: #7fb2e5;
+  --chart-1: #7fb2e5;
+  --chart-2: #f0a32e;
+  --chart-3: #17406f;
+  --chart-4: #8a95a8;
+  --chart-5: #1d4e89;
+  --sidebar: #16243a;
+  --sidebar-foreground: #f2f4f7;
+  --sidebar-primary: #7fb2e5;
+  --sidebar-primary-foreground: #101c2e;
+  --sidebar-accent: #17406f;
+  --sidebar-accent-foreground: #f2f4f7;
+  --sidebar-border: rgba(242, 244, 247, 0.1);
+  --sidebar-ring: #7fb2e5;
+  --brand: #7fb2e5;
+  --brand-strong: #7fb2e5;
+  --brand-soft: #a9cbee;
+  --brand-on-dark: #7fb2e5;
+  --signal: #f0a32e;
+  --ink: #f2f4f7;
+  --slate: #8a95a8;
+  --surface-tint: #16243a;
+  --travel-mode-air: var(--brand);
+  --travel-mode-boat: #14b8a6;
+  --travel-mode-train: var(--signal);
   --travel-mode-automotive: #8b5cf6;
   --travel-mode-unresolved: var(--muted-foreground);
 }
@@ -133,14 +256,22 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-brand-blue: var(--brand-blue);
-  --color-brand-blue-light: var(--brand-blue-light);
-  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-on-dark: var(--brand-on-dark);
+  --color-signal: var(--signal);
+  --color-ink: var(--ink);
+  --color-slate: var(--slate);
+  --color-surface-tint: var(--surface-tint);
   --color-travel-mode-air: var(--travel-mode-air);
   --color-travel-mode-boat: var(--travel-mode-boat);
   --color-travel-mode-train: var(--travel-mode-train);
   --color-travel-mode-automotive: var(--travel-mode-automotive);
   --color-travel-mode-unresolved: var(--travel-mode-unresolved);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
 @layer base {
@@ -150,6 +281,11 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
   }
 
   /**

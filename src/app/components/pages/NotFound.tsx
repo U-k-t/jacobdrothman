@@ -12,7 +12,7 @@ export function NotFound() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-[#1fa2ff]/25 transition-all"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-brand to-brand-soft text-white px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-brand/25 transition-all"
         >
           <Home size={20} />
           Back to Home

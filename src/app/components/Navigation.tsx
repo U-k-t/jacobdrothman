@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { Brandmark } from "./Brandmark";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +16,8 @@ export function Navigation() {
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-xl font-medium tracking-tight hover:opacity-70 transition-opacity">
-            Jacob Rothman
+          <Link to="/" className="text-xl hover:opacity-70 transition-opacity">
+            <Brandmark />
           </Link>
 
           <button
@@ -30,8 +31,8 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             <Link
               to="/"
-              className={`transition-colors hover:text-[#1fa2ff] ${
-                isActive("/") ? "text-[#1fa2ff]" : "text-muted-foreground"
+              className={`transition-colors hover:text-brand-strong ${
+                isActive("/") ? "text-brand-strong" : "text-muted-foreground"
               }`}
             >
               Home
@@ -39,8 +40,8 @@ export function Navigation() {
 
             <div className="relative group">
               <button
-                className={`flex items-center gap-1 transition-colors hover:text-[#1fa2ff] ${
-                  isParentActive("/about") ? "text-[#1fa2ff]" : "text-muted-foreground"
+                className={`flex items-center gap-1 transition-colors hover:text-brand-strong ${
+                  isParentActive("/about") ? "text-brand-strong" : "text-muted-foreground"
                 }`}
               >
                 About
@@ -70,8 +71,8 @@ export function Navigation() {
 
             <div className="relative group">
               <button
-                className={`flex items-center gap-1 transition-colors hover:text-[#1fa2ff] ${
-                  isParentActive("/portfolio") ? "text-[#1fa2ff]" : "text-muted-foreground"
+                className={`flex items-center gap-1 transition-colors hover:text-brand-strong ${
+                  isParentActive("/portfolio") ? "text-brand-strong" : "text-muted-foreground"
                 }`}
               >
                 Portfolio
@@ -101,16 +102,16 @@ export function Navigation() {
 
             <Link
               to="/resume"
-              className={`transition-colors hover:text-[#1fa2ff] ${
-                isActive("/resume") ? "text-[#1fa2ff]" : "text-muted-foreground"
+              className={`transition-colors hover:text-brand-strong ${
+                isActive("/resume") ? "text-brand-strong" : "text-muted-foreground"
               }`}
             >
               Resume
             </Link>
             <Link
               to="/contact"
-              className={`transition-colors hover:text-[#1fa2ff] ${
-                isActive("/contact") ? "text-[#1fa2ff]" : "text-muted-foreground"
+              className={`transition-colors hover:text-brand-strong ${
+                isActive("/contact") ? "text-brand-strong" : "text-muted-foreground"
               }`}
             >
               Contact
@@ -123,7 +124,7 @@ export function Navigation() {
             <Link
               to="/"
               onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-[#1fa2ff] transition-colors"
+              className="block py-2 hover:text-brand-strong transition-colors"
             >
               Home
             </Link>
@@ -131,7 +132,7 @@ export function Navigation() {
             <div>
               <button
                 onClick={() => setAboutOpen(!aboutOpen)}
-                className="flex items-center justify-between w-full py-2 hover:text-[#1fa2ff] transition-colors"
+                className="flex items-center justify-between w-full py-2 hover:text-brand-strong transition-colors"
               >
                 About
                 <ChevronDown
@@ -144,21 +145,21 @@ export function Navigation() {
                   <Link
                     to="/about"
                     onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="block py-1 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
                     Overview
                   </Link>
                   <Link
                     to="/about/travel"
                     onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="block py-1 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
                     Travel
                   </Link>
                   <Link
                     to="/about/climbing"
                     onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="block py-1 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
                     Climbing
                   </Link>
@@ -169,7 +170,7 @@ export function Navigation() {
             <div>
               <button
                 onClick={() => setPortfolioOpen(!portfolioOpen)}
-                className="flex items-center justify-between w-full py-2 hover:text-[#1fa2ff] transition-colors"
+                className="flex items-center justify-between w-full py-2 hover:text-brand-strong transition-colors"
               >
                 Portfolio
                 <ChevronDown
@@ -182,21 +183,21 @@ export function Navigation() {
                   <Link
                     to="/portfolio"
                     onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="block py-1 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
                     Overview
                   </Link>
                   <Link
                     to="/portfolio/product-case-studies"
                     onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="block py-1 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
                     Product Case Studies
                   </Link>
                   <Link
                     to="/portfolio/process-improvement"
                     onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
+                    className="block py-1 text-muted-foreground hover:text-brand-strong transition-colors"
                   >
                     Process Improvement
                   </Link>
@@ -207,14 +208,14 @@ export function Navigation() {
             <Link
               to="/resume"
               onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-[#1fa2ff] transition-colors"
+              className="block py-2 hover:text-brand-strong transition-colors"
             >
               Resume
             </Link>
             <Link
               to="/contact"
               onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-[#1fa2ff] transition-colors"
+              className="block py-2 hover:text-brand-strong transition-colors"
             >
               Contact
             </Link>

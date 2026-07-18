@@ -99,14 +99,14 @@ export function Resume() {
           <div className="space-y-12">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center">
-                  <Briefcase className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center">
+                  <Briefcase className="text-brand-strong" size={20} />
                 </div>
                 <h2>Experience</h2>
               </div>
               <div className="space-y-8">
                 {experience.map((job, index) => (
-                  <div key={index} className="border-l-2 border-[#1fa2ff]/30 pl-6">
+                  <div key={index} className="border-l-2 border-brand/30 pl-6">
                     <h3 className="mb-1">{job.title}</h3>
                     <div className="flex flex-wrap items-center gap-2 mb-3">
                       <span className="text-muted-foreground">{job.company}</span>
@@ -119,7 +119,7 @@ export function Resume() {
                           key={achievementIndex}
                           className="flex items-start gap-2 text-muted-foreground"
                         >
-                          <span className="text-[#1fa2ff] mt-1">•</span>
+                          <span className="text-brand-strong mt-1">•</span>
                           <span>{achievement}</span>
                         </li>
                       ))}
@@ -131,14 +131,14 @@ export function Resume() {
 
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center">
-                  <GraduationCap className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center">
+                  <GraduationCap className="text-brand-strong" size={20} />
                 </div>
                 <h2>Education</h2>
               </div>
               <div className="space-y-4">
                 {education.map((edu, index) => (
-                  <div key={index} className="border-l-2 border-[#1fa2ff]/30 pl-6">
+                  <div key={index} className="border-l-2 border-brand/30 pl-6">
                     <h3 className="mb-1">{edu.degree}</h3>
                     <div className="flex items-center gap-2">
                       <span className="text-muted-foreground">{edu.school}</span>
@@ -156,8 +156,8 @@ export function Resume() {
 
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center">
-                  <Award className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center">
+                  <Award className="text-brand-strong" size={20} />
                 </div>
                 <h2>Skills</h2>
               </div>

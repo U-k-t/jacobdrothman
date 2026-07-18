@@ -62,7 +62,7 @@ describe("Travel page", () => {
 
   it("gives the map an enlarged, low-padding container now that the legend and caption are gone", () => {
     const { container } = render(<Travel />);
-    const mapContainer = container.querySelector('[class*="border-\\[\\#1fa2ff\\]\\/20"]');
+    const mapContainer = container.querySelector('[class*="border-brand/20"]');
     expect(mapContainer).toBeInTheDocument();
     expect(mapContainer?.className).toContain("p-4");
     expect(mapContainer?.className).not.toContain("p-8");

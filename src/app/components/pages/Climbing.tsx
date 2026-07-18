@@ -24,8 +24,8 @@ export function Climbing() {
 
           <div className="grid sm:grid-cols-2 gap-4 mb-12">
             <div className="bg-accent/50 border border-border rounded-lg p-6 flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Award className="text-[#1fa2ff]" size={20} />
+              <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Award className="text-brand-strong" size={20} />
               </div>
               <div>
                 <div className="text-sm text-muted-foreground">Current level</div>
@@ -33,8 +33,8 @@ export function Climbing() {
               </div>
             </div>
             <div className="bg-accent/50 border border-border rounded-lg p-6 flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin className="text-[#1fa2ff]" size={20} />
+              <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <MapPin className="text-brand-strong" size={20} />
               </div>
               <div>
                 <div className="text-sm text-muted-foreground">Frequency</div>
@@ -49,7 +49,7 @@ export function Climbing() {
               {outdoorAreas.map((entry) => (
                 <div
                   key={entry.area}
-                  className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-[#1fa2ff]/30 transition-all"
+                  className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-brand/30 transition-all"
                 >
                   <h3 className="mb-3">{entry.area}</h3>
                   <div className="flex flex-wrap gap-2">
@@ -82,8 +82,8 @@ export function Climbing() {
           </div>
 
           <div className="bg-accent/50 border border-border rounded-lg p-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-              <TrendingUp className="text-[#1fa2ff]" size={20} />
+            <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4">
+              <TrendingUp className="text-brand-strong" size={20} />
             </div>
             <h3 className="mb-3">Parallels to Product Management</h3>
             <ul className="space-y-2 text-muted-foreground">

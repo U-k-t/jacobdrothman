@@ -47,7 +47,7 @@ export function ProductCaseStudies() {
                     <h2 className="mb-2">{study.title}</h2>
                     <p className="text-muted-foreground">{study.company}</p>
                   </div>
-                  <div className="bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 text-[#1fa2ff] px-4 py-2 rounded-lg self-start">
+                  <div className="bg-gradient-to-br from-brand/20 to-brand-soft/20 text-brand-strong px-4 py-2 rounded-lg self-start">
                     {study.impact}
                   </div>
                 </div>
@@ -60,7 +60,7 @@ export function ProductCaseStudies() {
                       key={metricIndex}
                       className="flex items-start gap-3 bg-accent/50 rounded-lg p-4"
                     >
-                      <BarChart className="text-[#1fa2ff] flex-shrink-0 mt-0.5" size={20} />
+                      <BarChart className="text-brand-strong flex-shrink-0 mt-0.5" size={20} />
                       <span className="text-sm">{metric}</span>
                     </div>
                   ))}
@@ -73,8 +73,8 @@ export function ProductCaseStudies() {
             <h2 className="mb-6">My Approach to Product Development</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4">
+                  <Users className="text-brand-strong" size={20} />
                 </div>
                 <h3 className="mb-2">User-Centered</h3>
                 <p className="text-muted-foreground">
@@ -82,8 +82,8 @@ export function ProductCaseStudies() {
                 </p>
               </div>
               <div>
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-                  <Target className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4">
+                  <Target className="text-brand-strong" size={20} />
                 </div>
                 <h3 className="mb-2">Data-Driven</h3>
                 <p className="text-muted-foreground">
@@ -91,8 +91,8 @@ export function ProductCaseStudies() {
                 </p>
               </div>
               <div>
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-                  <BarChart className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4">
+                  <BarChart className="text-brand-strong" size={20} />
                 </div>
                 <h3 className="mb-2">Iterative</h3>
                 <p className="text-muted-foreground">

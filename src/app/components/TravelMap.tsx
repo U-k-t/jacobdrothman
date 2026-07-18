@@ -17,7 +17,7 @@ export function TravelMap() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-gradient-to-br from-[#1fa2ff]/5 to-[#60b8ff]/10 border border-[#1fa2ff]/20 rounded-lg p-4 mb-12 overflow-hidden"
+      className="relative w-full bg-gradient-to-br from-brand/5 to-brand-soft/10 border border-brand/20 rounded-lg p-4 mb-12 overflow-hidden"
     >
       <MapCanvas legs={legs} activeLegIndex={activeLegIndex} />
 

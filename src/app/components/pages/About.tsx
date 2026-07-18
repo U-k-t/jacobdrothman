@@ -27,32 +27,32 @@ export function About() {
           <div className="grid md:grid-cols-2 gap-6">
             <Link
               to="/about/travel"
-              className="group bg-card border border-border rounded-lg p-6 hover:shadow-lg hover:border-[#1fa2ff]/30 transition-all"
+              className="group bg-card border border-border rounded-lg p-6 hover:shadow-lg hover:border-brand/30 transition-all"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Plane className="text-[#1fa2ff]" size={24} />
+              <div className="w-12 h-12 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Plane className="text-brand-strong" size={24} />
               </div>
               <h3 className="mb-2">Travel Adventures</h3>
               <p className="text-muted-foreground mb-4">
                 Exploring new cultures, perspectives, and cuisines around the globe. Each journey teaches me something new about people and problem-solving.
               </p>
-              <span className="text-[#1fa2ff] group-hover:underline">
+              <span className="text-brand-strong group-hover:underline">
                 Read more →
               </span>
             </Link>
 
             <Link
               to="/about/climbing"
-              className="group bg-card border border-border rounded-lg p-6 hover:shadow-lg hover:border-[#1fa2ff]/30 transition-all"
+              className="group bg-card border border-border rounded-lg p-6 hover:shadow-lg hover:border-brand/30 transition-all"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Mountain className="text-[#1fa2ff]" size={24} />
+              <div className="w-12 h-12 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Mountain className="text-brand-strong" size={24} />
               </div>
               <h3 className="mb-2">Rock Climbing</h3>
               <p className="text-muted-foreground mb-4">
                 Pushing limits on the rock face, where every route is a puzzle to solve and every climb teaches resilience and planning.
               </p>
-              <span className="text-[#1fa2ff] group-hover:underline">
+              <span className="text-brand-strong group-hover:underline">
                 Read more →
               </span>
             </Link>

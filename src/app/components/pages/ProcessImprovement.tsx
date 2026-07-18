@@ -68,7 +68,7 @@ export function ProcessImprovement() {
                           key={resultIndex}
                           className="flex items-start gap-3 bg-accent/50 rounded-lg p-4"
                         >
-                          <CheckCircle className="text-[#1fa2ff] flex-shrink-0 mt-0.5" size={20} />
+                          <CheckCircle className="text-brand-strong flex-shrink-0 mt-0.5" size={20} />
                           <span className="text-sm">{result}</span>
                         </div>
                       ))}
@@ -83,8 +83,8 @@ export function ProcessImprovement() {
             <h2 className="mb-6">Process Improvement Philosophy</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-                  <Users2 className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4">
+                  <Users2 className="text-brand-strong" size={20} />
                 </div>
                 <h3 className="mb-2">People First</h3>
                 <p className="text-muted-foreground">
@@ -92,8 +92,8 @@ export function ProcessImprovement() {
                 </p>
               </div>
               <div>
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-                  <Zap className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4">
+                  <Zap className="text-brand-strong" size={20} />
                 </div>
                 <h3 className="mb-2">Start Small</h3>
                 <p className="text-muted-foreground">
@@ -101,8 +101,8 @@ export function ProcessImprovement() {
                 </p>
               </div>
               <div>
-                <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-                  <CheckCircle className="text-[#1fa2ff]" size={20} />
+                <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center mb-4">
+                  <CheckCircle className="text-brand-strong" size={20} />
                 </div>
                 <h3 className="mb-2">Measure Impact</h3>
                 <p className="text-muted-foreground">

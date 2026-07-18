@@ -79,7 +79,7 @@ export function SoftwareProjects() {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-4 py-2 rounded-lg hover:shadow-md transition-all"
+                        className="flex items-center gap-2 text-sm bg-gradient-to-r from-brand to-brand-soft text-white px-4 py-2 rounded-lg hover:shadow-md transition-all"
                       >
                         <ExternalLink size={16} />
                         Demo
@@ -98,7 +98,7 @@ export function SoftwareProjects() {
                         key={featureIndex}
                         className="flex items-start gap-2 text-sm text-muted-foreground"
                       >
-                        <span className="text-[#1fa2ff] mt-1">→</span>
+                        <span className="text-brand-strong mt-1">→</span>
                         <span>{feature}</span>
                       </div>
                     ))}
@@ -115,23 +115,23 @@ export function SoftwareProjects() {
             </p>
             <ul className="space-y-2 text-muted-foreground">
               <li className="flex items-start gap-2">
-                <span className="text-[#1fa2ff] mt-1">•</span>
+                <span className="text-brand-strong mt-1">•</span>
                 <span>Have technical discussions with engineering teams in their language</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#1fa2ff] mt-1">•</span>
+                <span className="text-brand-strong mt-1">•</span>
                 <span>Make realistic scope and timeline estimates</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#1fa2ff] mt-1">•</span>
+                <span className="text-brand-strong mt-1">•</span>
                 <span>Prototype solutions quickly to test ideas</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#1fa2ff] mt-1">•</span>
+                <span className="text-brand-strong mt-1">•</span>
                 <span>Understand technical constraints and trade-offs</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#1fa2ff] mt-1">•</span>
+                <span className="text-brand-strong mt-1">•</span>
                 <span>Build internal tools when off-the-shelf solutions don't fit</span>
               </li>
             </ul>
