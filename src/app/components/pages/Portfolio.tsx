@@ -9,7 +9,7 @@ export function Portfolio() {
           <h1 className="mb-6">Portfolio</h1>
 
           <p className="text-lg text-muted-foreground mb-12">
-            A showcase of my work across product strategy, process optimization, and technical projects. Each piece represents a challenge overcome and lessons learned.
+            Selected work across product launches, customer discovery, and internal tooling.
           </p>
 
           <div className="space-y-6">
@@ -26,7 +26,7 @@ export function Portfolio() {
                     Product Case Studies
                   </h2>
                   <p className="text-muted-foreground mb-4">
-                    Deep dives into product launches, feature development, and strategic initiatives. See how I've driven product success from concept to delivery.
+                    Two case studies: an AI-infrastructure hardware product line at Infineon and a B2B marketplace I co-founded.
                   </p>
                   <span className="text-[#1fa2ff] group-hover:underline">
                     View case studies →
@@ -48,7 +48,7 @@ export function Portfolio() {
                     Process Improvement
                   </h2>
                   <p className="text-muted-foreground mb-4">
-                    How I've streamlined workflows, implemented agile practices, and fostered collaboration across teams to increase velocity and quality.
+                    Reporting tools, outreach automation, and CRM adoption work at Infineon, each with its own users and results.
                   </p>
                   <span className="text-[#1fa2ff] group-hover:underline">
                     Explore improvements →

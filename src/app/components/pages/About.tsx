@@ -10,11 +10,11 @@ export function About() {
 
           <div className="prose prose-lg max-w-none">
             <p className="text-lg text-muted-foreground mb-6">
-              I'm a product manager with a passion for building products that make a difference. With a background in software engineering and a love for solving complex problems, I bridge the gap between technical teams and business stakeholders.
+              I'm a product manager with a Computer Science degree and a B2B marketplace I co-founded and shipped. I turn customer research and data into roadmap decisions, and I'm comfortable with the technical tradeoffs behind them.
             </p>
 
             <p className="text-muted-foreground mb-6">
-              My journey into product management started with curiosity about how great products come to life. Over the years, I've led cross-functional teams, launched successful products, and continuously refined processes to deliver exceptional user experiences.
+              I've spent 5+ years at Infineon owning roadmap, customer, and launch decisions for technical products, working across engineering, sales, and quality, and building internal tools that improve how teams work.
             </p>
 
             <p className="text-muted-foreground mb-8">

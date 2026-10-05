@@ -3,25 +3,47 @@ import { CheckCircle, Zap, Users2 } from "lucide-react";
 export function ProcessImprovement() {
   const improvements = [
     {
-      title: "Reporting Automation",
-      context: "Product performance tracking relied on manual, recurring analysis across teams",
-      challenge: "Manual reporting was slow and inconsistent, eating into time that should have gone toward roadmap work",
-      solution: "Built Python automation to generate recurring reports, and built KPI dashboards for 6 teams to track adoption and monitor product performance",
+      title: "Overdue-Opportunity Outreach Automation (Python)",
+      context: "Infineon graduate program. Manual outreach limited operations to contacting the top 10 overdue opportunities per division",
+      challenge: "Outreach took enough time by hand that most overdue opportunities were never followed up",
+      solution: "Independently identified the bottleneck and built a Python automation that contacts account managers across the full overdue set, prompting date updates or design-win confirmation",
       results: [
-        "10+ hours/week of manual analysis eliminated",
-        "Consistent performance tracking across 6 teams",
-        "Freed up time for roadmap-level decision-making",
+        "Coverage expanded from the top accounts to the full overdue set",
+        "Users estimated the weekly process fell from roughly six hours to 30 minutes (about 92% less time)",
+        "User estimates, not a controlled time study",
       ],
     },
     {
-      title: "Funnel Analysis for Roadmap Prioritization",
-      context: "Roadmap decisions needed a clearer read on where users were dropping off",
-      challenge: "Without a systematic view of funnel performance, it was hard to prioritize the highest-impact experiments",
-      solution: "Analyzed funnel performance to identify conversion gaps, then used those findings to prioritize experiments and guide product improvements",
+      title: "Excel VBA Reporting Tool",
+      context: "Product managers needed funnel and distribution data consolidated for analysis",
+      challenge: "Analysis prep took a large share of PM time",
+      solution: "Built an Excel VBA tool that consolidated funnel and distribution data, segmented by region and filterable by use case",
       results: [
-        "Conversion gaps identified and prioritized systematically",
-        "Experimentation roadmap grounded in funnel data",
-        "Improvements guided by evidence rather than assumption",
+        "Adopted by 5 PMs",
+        "Users estimated 10+ hours saved weekly",
+        "Users estimated 95% less analysis prep time (user estimates, not a controlled study)",
+      ],
+    },
+    {
+      title: "Excel/Tableau KPI Dashboards",
+      context: "Teams needed a shared view of product KPIs and launch performance",
+      challenge: "Spotting deviations, and products with high pipeline but low revenue, across the portfolio",
+      solution: "Built Excel/Tableau dashboards that consolidated product KPIs and surfaced deviations and high-pipeline, low-revenue products",
+      results: [
+        "Used by 6 teams to monitor launches and inform roadmap decisions",
+        "Surfaced high-pipeline, low-revenue products",
+        "No verified time-savings figure",
+      ],
+    },
+    {
+      title: "CRM and Analytics Adoption",
+      context: "Infineon's Microsoft Dynamics CRM and Power BI tools. Inconsistent processes and unclear best practices created friction and data-quality problems",
+      challenge: "Teams used the same tools in different ways",
+      solution: "Interviewed stakeholders, reviewed usage data, wrote documentation and training, clarified best practices, and standardized workflows across teams",
+      results: [
+        "30% increase in adoption, based on active and licensed user counts",
+        "Improved use of existing platforms; I did not build Dynamics or Power BI",
+        "No independently measured data-quality figure",
       ],
     },
   ];
@@ -33,7 +55,7 @@ export function ProcessImprovement() {
           <h1 className="mb-6">Process Improvement</h1>
 
           <p className="text-lg text-muted-foreground mb-12">
-            Streamlining workflows and fostering collaboration to help teams work smarter, not harder. Here's how I've driven meaningful process improvements.
+            Streamlining workflows and fostering collaboration to help teams work smarter, not harder. Four separate examples, each with its own users and results.
           </p>
 
           <div className="space-y-12">

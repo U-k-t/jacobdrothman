@@ -4,24 +4,24 @@ export function ProductCaseStudies() {
   const caseStudies = [
     {
       title: "AI Infrastructure Product Launch",
-      company: "Infineon Technologies",
-      impact: "$30M+ revenue generated",
-      description: "Owned the product roadmap for a line of components serving AI infrastructure customers at Infineon Technologies. Translated customer requirements into feature and positioning decisions, then worked cross-functionally with engineering and go-to-market teams to take the product from requirements through launch — a requirements-to-roadmap-to-launch process that applies just as directly to software products.",
+      company: "Infineon Technologies · Product Marketing (semiconductor hardware)",
+      impact: "$30M+ realized revenue to date",
+      description: "Inherited a power-component program for AI servers after its prior owner left, at a time when customer requirements were moving faster than the roadmap. Requirements came mainly from power-module makers, plus direct NVIDIA engineering. I synthesized them into specification and package priorities, defended roadmap capacity, and owned feature and positioning decisions through launch and production ramp, as a project within a broader program owned by my manager. The key tradeoff was choosing the technology that was available and fit the customer's launch window over waiting for a more mature generation. This is semiconductor hardware, not an AI software product, but the requirements-to-launch tradeoffs are the same ones software teams make.",
       metrics: [
-        "$30M+ revenue generated",
-        "20%+ adoption increase in a high-growth market",
-        "Directly informed division roadmap strategy",
+        "$30M+ realized revenue to date for the product line",
+        "Won a strategic NVIDIA platform slot",
+        "Owned feature and positioning decisions through launch and production ramp",
       ],
     },
     {
       title: "B2B Marketplace Co-Founding",
-      company: "Trusty (formerly Glacier)",
-      impact: "$1.2M in seed funding",
-      description: "Co-founded a B2B proptech marketplace for broker-sourced comparables, enabling listing discovery and purchase workflows for commercial real estate professionals. Owned the discovery-to-roadmap process end to end — translating broker research into requirements and prioritized feature concepts, then running experiments and journey analysis to validate needs and guide pivots.",
+      company: "Trusty (formerly Glacier) · Co-Founder, product and technical · no longer operating",
+      impact: "Shipped MVP with live Stripe purchase flow",
+      description: "One of four co-founders of a B2B proptech marketplace for broker-sourced commercial real estate comparables. The original property-insights idea needed data that wasn't available in usable form, and brokers held comparable sale and lease data informally. I led discovery-to-roadmap work, translating broker conversations, task-based usability sessions, open demos, and competitive walkthroughs into requirements and prioritized search, reporting, and purchasing workflows, and handled architecture and implementation. The research informed three major pivots and the team shipped a working comparables marketplace.",
       metrics: [
-        "Led product from 0-to-1 as a co-founder",
-        "$1.2M in VC funding, informed by early GTM traction",
-        "Broker research directly shaped the product roadmap",
+        "25+ research participants, mostly target brokers, informed three pivots",
+        "LOIs from 2-3 brokerages (demand signals, not paid customers)",
+        "Contributed to a pre-seed round: $120K for 10% equity ($1.2M valuation); I did not close the round",
       ],
     },
   ];
