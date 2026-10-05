@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router";
 import { Navigation } from "./Navigation";
 import { Footer } from "./Footer";
 import { BrandSwitcher } from "./dev/BrandSwitcher";
-import { BrandSwitcher } from "./dev/BrandSwitcher";
 
 export function Root() {
   const { pathname, hash } = useLocation();
@@ -24,7 +23,6 @@ export function Root() {
         <Outlet />
       </main>
       <Footer />
-      {import.meta.env.DEV && <BrandSwitcher />}
       {import.meta.env.DEV && <BrandSwitcher />}
     </div>
   );
