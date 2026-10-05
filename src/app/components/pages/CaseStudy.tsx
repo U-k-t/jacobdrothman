@@ -1,17 +1,32 @@
+import type { ReactNode } from "react";
 import { Link, useParams } from "react-router";
 import { ArrowLeft, CheckCircle } from "lucide-react";
 import { getCaseStudy, type WorkEntry } from "../../data/work";
 import { NotFound } from "./NotFound";
 
-const fields: { key: "problem" | "role" | "decision" | "shipped"; label: string }[] = [
-  { key: "problem", label: "Problem" },
-  { key: "role", label: "My role" },
-  { key: "decision", label: "Decision" },
-  { key: "shipped", label: "What shipped or changed" },
-];
-
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+// Text that still needs real content. Anything in "[Question: ...]" brackets is styled as a to-do.
+function Text({ children }: { children: string }) {
+  const parts = children.split(/(\[Question:[^\]]*\])/g).filter(Boolean);
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.startsWith("[Question") ? (
+          <mark
+            key={i}
+            className="bg-amber-100 text-amber-900 dark:bg-amber-900/30 dark:text-amber-200 rounded px-1"
+          >
+            {part}
+          </mark>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
 
 function Results({ items }: { items: string[] }) {
   return (
@@ -19,62 +34,86 @@ function Results({ items }: { items: string[] }) {
       {items.map((r) => (
         <div key={r} className="flex items-start gap-3 bg-accent/50 rounded-lg p-4">
           <CheckCircle className="text-[#1fa2ff] flex-shrink-0 mt-0.5" size={20} />
-          <span className="text-sm">{r}</span>
+          <span className="text-sm">
+            <Text>{r}</Text>
+          </span>
         </div>
       ))}
     </div>
   );
 }
 
-// Single-story case study: result first, then the narrative, with the decision given extra weight.
-function FullEntry({ entry }: { entry: WorkEntry }) {
+function Section({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="space-y-8">
-      <div>
-        <h2 className="text-xs uppercase tracking-wider text-muted-foreground mb-3">Result</h2>
-        <Results items={entry.result} />
-      </div>
-      <dl className="bg-card border border-border rounded-lg p-6 sm:p-8 space-y-7">
-        {fields.map(({ key, label }) =>
-          key === "decision" ? (
-            <div key={key} className="border-l-2 border-[#1fa2ff] pl-5 -ml-1">
-              <dt className="text-[#1fa2ff] mb-2">{label}</dt>
-              <dd className="text-lg">{entry[key]}</dd>
-            </div>
-          ) : (
-            <div key={key}>
-              <dt className="mb-2">{label}</dt>
-              <dd className="text-muted-foreground">{entry[key]}</dd>
-            </div>
-          ),
-        )}
-      </dl>
+    <div>
+      <h3 className="text-xs uppercase tracking-wider text-muted-foreground mb-2">{label}</h3>
+      {children}
     </div>
   );
 }
 
-// One of several initiatives: result leads, then a compact two-column narrative with quiet labels.
-function CompactEntry({ entry, index }: { entry: WorkEntry; index: number }) {
+// The PM case-study structure: problem, role, learning, tradeoff, what I did, result, optional hindsight.
+function EntryBody({ entry }: { entry: WorkEntry }) {
   return (
-    <article
-      id={entry.heading ? slugify(entry.heading) : undefined}
-      className="bg-card border border-border rounded-lg p-6 sm:p-8 scroll-mt-24"
-    >
-      <p className="text-xs text-muted-foreground mb-1">Initiative {index + 1}</p>
-      <h2 className="text-xl mb-5">{entry.heading}</h2>
-      <div className="mb-6">
-        <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Result</p>
-        <Results items={entry.result} />
-      </div>
-      <dl className="grid md:grid-cols-2 gap-x-8 gap-y-5">
-        {fields.map(({ key, label }) => (
-          <div key={key}>
-            <dt className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{label}</dt>
-            <dd className="text-sm">{entry[key]}</dd>
+    <div className="space-y-7">
+      <Section label="Problem">
+        <p>
+          <Text>{entry.problem}</Text>
+        </p>
+      </Section>
+
+      <Section label="My role">
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="rounded-lg border border-border p-4">
+            <p className="text-xs text-[#1fa2ff] mb-1">I owned</p>
+            <p className="text-sm">
+              <Text>{entry.role.mine}</Text>
+            </p>
           </div>
-        ))}
-      </dl>
-    </article>
+          {entry.role.team && (
+            <div className="rounded-lg border border-border p-4">
+              <p className="text-xs text-muted-foreground mb-1">Team and others</p>
+              <p className="text-sm text-muted-foreground">
+                <Text>{entry.role.team}</Text>
+              </p>
+            </div>
+          )}
+        </div>
+      </Section>
+
+      <div className="border-l-2 border-[#1fa2ff] pl-5 -ml-1">
+        <h3 className="text-xs uppercase tracking-wider text-[#1fa2ff] mb-2">
+          Key decision / tradeoff
+        </h3>
+        <p className="text-lg">
+          <Text>{entry.tradeoff}</Text>
+        </p>
+      </div>
+
+      <Section label="What I did">
+        <p className="text-muted-foreground">
+          <Text>{entry.did}</Text>
+        </p>
+      </Section>
+
+      <Section label="Result">
+        <Results items={entry.result} />
+      </Section>
+
+      <Section label="What I learned">
+        <p className="text-muted-foreground">
+          <Text>{entry.learned}</Text>
+        </p>
+      </Section>
+
+      {entry.differently && (
+        <Section label="What I'd do differently">
+          <p className="text-muted-foreground">
+            <Text>{entry.differently}</Text>
+          </p>
+        </Section>
+      )}
+    </div>
   );
 }
 
@@ -116,13 +155,21 @@ export function CaseStudy() {
           )}
 
           <div className="space-y-8">
-            {study.entries.map((entry, i) =>
-              multi ? (
-                <CompactEntry key={entry.heading} entry={entry} index={i} />
-              ) : (
-                <FullEntry key={study.slug} entry={entry} />
-              ),
-            )}
+            {study.entries.map((entry, i) => (
+              <article
+                key={entry.heading ?? study.slug}
+                id={entry.heading ? slugify(entry.heading) : undefined}
+                className="bg-card border border-border rounded-lg p-6 sm:p-8 scroll-mt-24"
+              >
+                {multi && (
+                  <>
+                    <p className="text-xs text-muted-foreground mb-1">Initiative {i + 1}</p>
+                    <h2 className="text-xl mb-6">{entry.heading}</h2>
+                  </>
+                )}
+                <EntryBody entry={entry} />
+              </article>
+            ))}
           </div>
         </div>
       </section>
