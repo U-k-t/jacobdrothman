@@ -10,12 +10,12 @@ const stats = [
   { value: "25+", label: "Research participants in Trusty discovery, mostly target brokers" },
 ];
 
-// Cards read as a progression: scale, then 0-to-1, then internal tooling.
-// To swap the last card for a software project (e.g. Fountain), replace its
-// object below. Every field is plain data, so no layout changes are needed.
+// Cards read as a progression: scale, then 0-to-1, then product operations.
+// Each links to its case study via slug.
 const featured = [
   {
     stage: "Commercial scale",
+    slug: "ai-infrastructure-launch",
     title: "AI-infrastructure product line",
     org: "Infineon · Product Marketing (semiconductor hardware)",
     context:
@@ -30,6 +30,7 @@ const featured = [
   },
   {
     stage: "0 → 1",
+    slug: "trusty-marketplace",
     title: "B2B marketplace for broker-sourced comps",
     org: "Trusty (formerly Glacier) · Co-Founder, product and technical · no longer operating",
     context:
@@ -43,17 +44,18 @@ const featured = [
     ],
   },
   {
-    stage: "Internal tools",
-    title: "Three separate internal builds",
-    org: "Infineon · Product Marketing · each build has its own users and results",
+    stage: "Product operations",
+    slug: "product-operations",
+    title: "Scaling product operations",
+    org: "Infineon · Product Marketing · four separate initiatives, each with its own users and results",
     context:
-      "Not one project. A Python outreach automation, an Excel VBA reporting tool, and Excel/Tableau KPI dashboards, each built to remove a different manual step.",
+      "Automation, reporting, and adoption work to give product teams back time and a shared view of the business.",
     decision:
-      "Python outreach automation: overdue-opportunity outreach was limited to the top 10 per division because it took too long by hand, so I automated it to reach the full overdue set.",
+      "Python outreach automation: overdue-opportunity outreach was limited to the top 10 per division, so I automated it to reach the full overdue set.",
     outcomes: [
-      "Python automation: coverage grew from top 10 per division to the full set; users estimated the weekly process fell from about six hours to 30 minutes",
-      "Excel VBA reporting tool: adopted by 5 PMs; users estimated 10+ hours saved weekly",
-      "Excel/Tableau KPI dashboards: used by 6 teams to monitor launches; no time-savings figure",
+      "Outreach coverage grew from the top 10 per division to the full overdue set",
+      "VBA reporting tool adopted by 5 PMs; KPI dashboards used by 6 teams",
+      "30% increase in CRM and analytics adoption (active and licensed users)",
     ],
   },
 ];
@@ -98,7 +100,7 @@ export function Home() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                to="/portfolio/product-case-studies"
+                to="/work"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-[#1fa2ff]/25 transition-all"
               >
                 View My Work
@@ -139,7 +141,7 @@ export function Home() {
           <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
             <h2 className="text-3xl">Selected Work</h2>
             <Link
-              to="/portfolio"
+              to="/work"
               className="inline-flex items-center gap-1 text-[#1fa2ff] hover:gap-2 transition-all"
             >
               All work
@@ -162,7 +164,7 @@ export function Home() {
                   <span className="text-[#1fa2ff]">Decision: </span>
                   {item.decision}
                 </p>
-                <ul className="space-y-2 mt-auto">
+                <ul className="space-y-2 mb-5">
                   {item.outcomes.map((outcome) => (
                     <li key={outcome} className="flex items-start gap-2 text-sm">
                       <span className="text-[#1fa2ff] mt-0.5">→</span>
@@ -170,15 +172,22 @@ export function Home() {
                     </li>
                   ))}
                 </ul>
+                <Link
+                  to={`/work/${item.slug}`}
+                  className="mt-auto inline-flex items-center gap-1 text-[#1fa2ff] hover:gap-2 transition-all"
+                >
+                  Read the case study
+                  <ArrowRight size={16} />
+                </Link>
               </article>
             ))}
           </div>
           <div className="mt-8">
             <Link
-              to="/portfolio/product-case-studies"
+              to="/work"
               className="inline-flex items-center gap-1 text-[#1fa2ff] hover:gap-2 transition-all"
             >
-              Read the case studies
+              See all work
               <ArrowRight size={16} />
             </Link>
           </div>

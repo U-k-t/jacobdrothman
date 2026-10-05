@@ -5,7 +5,6 @@ import { useState } from "react";
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [portfolioOpen, setPortfolioOpen] = useState(false);
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -68,36 +67,14 @@ export function Navigation() {
               </div>
             </div>
 
-            <div className="relative group">
-              <button
-                className={`flex items-center gap-1 transition-colors hover:text-[#1fa2ff] ${
-                  isParentActive("/portfolio") ? "text-[#1fa2ff]" : "text-muted-foreground"
-                }`}
-              >
-                Portfolio
-                <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 w-52 bg-popover border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <Link
-                  to="/portfolio"
-                  className="block px-4 py-2 hover:bg-accent rounded-t-lg transition-colors"
-                >
-                  Overview
-                </Link>
-                <Link
-                  to="/portfolio/product-case-studies"
-                  className="block px-4 py-2 hover:bg-accent transition-colors"
-                >
-                  Product Case Studies
-                </Link>
-                <Link
-                  to="/portfolio/process-improvement"
-                  className="block px-4 py-2 hover:bg-accent rounded-b-lg transition-colors"
-                >
-                  Process Improvement
-                </Link>
-              </div>
-            </div>
+            <Link
+              to="/work"
+              className={`transition-colors hover:text-[#1fa2ff] ${
+                isParentActive("/work") ? "text-[#1fa2ff]" : "text-muted-foreground"
+              }`}
+            >
+              Work
+            </Link>
 
             <Link
               to="/resume"
@@ -166,43 +143,13 @@ export function Navigation() {
               )}
             </div>
 
-            <div>
-              <button
-                onClick={() => setPortfolioOpen(!portfolioOpen)}
-                className="flex items-center justify-between w-full py-2 hover:text-[#1fa2ff] transition-colors"
-              >
-                Portfolio
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform ${portfolioOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-              {portfolioOpen && (
-                <div className="pl-4 space-y-2 mt-2">
-                  <Link
-                    to="/portfolio"
-                    onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
-                  >
-                    Overview
-                  </Link>
-                  <Link
-                    to="/portfolio/product-case-studies"
-                    onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
-                  >
-                    Product Case Studies
-                  </Link>
-                  <Link
-                    to="/portfolio/process-improvement"
-                    onClick={() => setIsOpen(false)}
-                    className="block py-1 text-muted-foreground hover:text-[#1fa2ff] transition-colors"
-                  >
-                    Process Improvement
-                  </Link>
-                </div>
-              )}
-            </div>
+            <Link
+              to="/work"
+              onClick={() => setIsOpen(false)}
+              className="block py-2 hover:text-[#1fa2ff] transition-colors"
+            >
+              Work
+            </Link>
 
             <Link
               to="/resume"
