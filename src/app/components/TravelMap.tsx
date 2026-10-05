@@ -64,7 +64,7 @@ export function TravelMap() {
 
       <div className="mt-4 text-center">
         <p className="text-sm text-muted-foreground">
-          Journey across continents • Flight paths coming soon
+          Southern California, Europe, East Asia, and Alaska
         </p>
       </div>
     </div>

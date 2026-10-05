@@ -1,7 +1,16 @@
+import { useEffect } from "react";
 import { MapPin } from "lucide-react";
 import { TravelMap } from "../TravelMap";
 
 export function Travel() {
+  useEffect(() => {
+    const previous = document.title;
+    document.title = "Travel | Jacob Rothman";
+    return () => {
+      document.title = previous;
+    };
+  }, []);
+
   const timeline = [
     { year: "2026", places: ["Zurich", "Rome"] },
     { year: "2025", places: ["California Central Coast"] },
@@ -41,10 +50,10 @@ export function Travel() {
 
           <p className="text-lg text-muted-foreground mb-12">
             I grew up in Southern California, and travel has been a constant since — from
-            family trips and cruises early on to two work relocations to Europe (Villach,
-            Austria in 2021, then Munich, Germany in 2022) that put most of the continent
-            within a short flight. That same curiosity has taken me across East Asia and
-            back home to explore more of California too.
+            family trips and cruises early on to two work moves to Europe (Villach, Austria
+            in 2021, then Munich, Germany in 2022) that put most of the continent within a
+            short flight. Since then I've also been to East Asia and explored more of
+            California.
           </p>
 
           <TravelMap />
@@ -75,17 +84,6 @@ export function Travel() {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="mt-12 bg-accent/50 border border-border rounded-lg p-6">
-            <h3 className="mb-3">What Travel Teaches Me</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>• Empathy for diverse user needs and cultural contexts</li>
-              <li>• Adaptability when plans change unexpectedly</li>
-              <li>• The importance of research and preparation</li>
-              <li>• How to communicate across language and cultural barriers</li>
-              <li>• Finding creative solutions with limited resources</li>
-            </ul>
           </div>
         </div>
       </section>
