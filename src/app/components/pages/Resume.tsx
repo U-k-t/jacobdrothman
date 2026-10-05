@@ -1,5 +1,8 @@
 import { Link } from "react-router";
-import { Briefcase, GraduationCap, Award } from "lucide-react";
+import { Briefcase, GraduationCap, Award, Download } from "lucide-react";
+
+// Place the PDF at public/Jacob-Rothman-Resume.pdf
+const RESUME_PDF = "/Jacob-Rothman-Resume.pdf";
 
 export function Resume() {
   const experience = [
@@ -64,30 +67,25 @@ export function Resume() {
     },
   ];
 
-  const skills = {
-    "Product": [
-      "Roadmapping & Prioritization",
-      "Customer Discovery",
-      "Requirements & Launch",
-      "Stakeholder Management",
-    ],
-    "Data & Technical": [
-      "SQL",
-      "Python",
-      "Excel / VBA",
-      "Tableau",
-      "Funnel Analysis",
-      "Systems Design",
-    ],
-  };
+  const skills = ["SQL", "Python", "Excel / VBA", "Tableau", "Funnel Analysis", "Systems Design"];
 
   return (
     <div className="min-h-[calc(100vh-theme(spacing.16))]">
       <section className="py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="mb-4">Resume</h1>
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+            <h1>Resume</h1>
+            <a
+              href={RESUME_PDF}
+              download
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-5 py-2.5 rounded-lg hover:shadow-lg hover:shadow-[#1fa2ff]/25 transition-all"
+            >
+              <Download size={20} />
+              Download Resume
+            </a>
+          </div>
           <p className="text-lg text-muted-foreground mb-12">
-            Product leader with 5+ years owning roadmap and prioritization decisions, customer discovery, and launches at Infineon. Computer Science degree, plus startup experience as a co-founder. Moving into software product management.
+            Product manager with 5+ years owning roadmap and prioritization decisions, customer discovery, and launches for semiconductor hardware at Infineon. Computer Science degree, plus startup experience as a co-founder. Moving that product ownership into software.
           </p>
 
           <div className="space-y-12">
@@ -171,23 +169,13 @@ export function Resume() {
                 <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center">
                   <Award className="text-[#1fa2ff]" size={20} />
                 </div>
-                <h2>Skills</h2>
+                <h2>Technical skills</h2>
               </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                {Object.entries(skills).map(([category, skillList]) => (
-                  <div key={category} className="bg-card border border-border rounded-lg p-6">
-                    <h3 className="mb-3">{category}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {skillList.map((skill) => (
-                        <span
-                          key={skill}
-                          className="bg-accent px-3 py-1 rounded-full text-sm"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                  <span key={skill} className="bg-accent px-3 py-1 rounded-full text-sm">
+                    {skill}
+                  </span>
                 ))}
               </div>
             </div>

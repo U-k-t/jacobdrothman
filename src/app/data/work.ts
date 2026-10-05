@@ -10,14 +10,15 @@ export type WorkEntry = {
     mine: string; // what I personally owned
     team?: string; // what others owned or contributed
   };
-  tradeoff: string; // the call I made and what it traded against, in one statement
+  tradeoff: string; // the call I made and, where the source supports it, what it traded against
+  decisionOnly?: boolean; // true where no real tradeoff is established: renders as "Key decision"
   did: string; // what I did
   result: string[];
   learned: string; // a product lesson specific to what happened
   differently?: string; // optional: only where the source supports real hindsight
 };
 
-// Any text in "[Question: ...]" brackets is a fact only I can supply. It renders as a visible
+// Any text in "" brackets is a fact only I can supply. It renders as a visible
 // to-do. Answer it or delete it before publishing; do not guess at facts the source doesn't support.
 
 export type CaseStudy = {
@@ -40,7 +41,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Took over a power-component program for AI servers and chose the launch path that fit the customer's timeline.",
     headline: "$30M+ realized revenue to date",
-    note: "The product is semiconductor hardware, not AI software. The work will be familiar to software PMs: reconciling customer requirements into roadmap and launch tradeoffs.",
+    note: "The product is semiconductor hardware, not AI software. The work that transfers is reconciling conflicting customer requirements into roadmap and launch tradeoffs against a fixed customer deadline.",
     entries: [
       {
         problem:
@@ -49,10 +50,10 @@ export const caseStudies: CaseStudy[] = [
           mine:
             "I owned this project within the program: synthesizing customer requirements, setting specification and package priorities, defending roadmap capacity, and the feature and positioning decisions through launch and ramp.",
           team:
-            "The broader program was owned by my manager. [Question: which teams designed, qualified, and manufactured the product, and what did each own? One line per team is enough.]",
+            "The broader program was owned by my manager.",
         },
         tradeoff:
-          "I chose to launch with the technology that was available and fit the customer's launch window rather than wait for the more mature generation, balancing the customer's efficiency requirements against feasibility. [Question: what concrete downside did launching with the available technology accept, and how did the customer respond to it?]",
+          "I chose to launch with the technology that was available and fit the customer's launch window rather than wait for the more mature generation, balancing the customer's efficiency requirements against feasibility.",
         did:
           "Gathered requirements from module partners and the customer's engineers directly, set the specification and package priorities, and defended roadmap capacity. The product launched and ramped to production.",
         result: [
@@ -60,7 +61,7 @@ export const caseStudies: CaseStudy[] = [
           "Won a strategic NVIDIA platform slot",
         ],
         learned:
-          "The customer's launch window was the binding constraint, and the product that fit it won the platform slot. [Question: what did talking directly to the customer's engineers tell you that feedback from the module makers alone did not?]",
+          "The customer's launch window was the binding constraint, and the product that fit it won the platform slot.",
       },
     ],
   },
@@ -80,7 +81,7 @@ export const caseStudies: CaseStudy[] = [
           mine:
             "I led discovery-to-roadmap work and owned architecture and implementation.",
           team:
-            "One of four co-founders. [Question: what did the other three co-founders own (for example sales, fundraising, broker relationships)?] I contributed to the pre-seed round but did not close it.",
+            "One of four co-founders. I contributed to the pre-seed round but did not close it.",
         },
         tradeoff:
           "I let what brokers said and did, not our original idea, set direction. That led to three pivots, including the path from property insights to listings to broker-sourced comparables, and a roadmap focused on search, reporting, and purchasing workflows.",
@@ -93,7 +94,7 @@ export const caseStudies: CaseStudy[] = [
           "Contributed to a pre-seed round: $120K for 10% equity ($1.2M valuation). I did not close the round.",
         ],
         learned:
-          "The data we needed lived informally with brokers rather than in any usable dataset, so the product had to start from what brokers already held. [Question: what was the single most surprising thing brokers told you or did in a session, and which pivot did it trigger?]",
+          "The data we needed lived informally with brokers rather than in any usable dataset, so the product had to start from what brokers already held.",
       },
     ],
   },
@@ -116,10 +117,11 @@ export const caseStudies: CaseStudy[] = [
           mine:
             "I spotted the bottleneck on my own and built the automation myself, during the Infineon graduate program.",
           team:
-            "Account managers were the recipients and acted on the prompts. [Question: who owned the manual process before, and who approved rolling out the automation?]",
+            "Account managers were the recipients and acted on the prompts.",
         },
+        decisionOnly: true,
         tradeoff:
-          "I automated outreach to cover the full overdue set instead of continuing to prioritize the top 10 per division. [Question: did covering the full set have any downside, such as more messages reaching account managers? Say so only if it actually came up.]",
+          "I automated outreach to cover the full overdue set instead of continuing to prioritize the top 10 per division.",
         did:
           "Built a Python automation that contacts account managers, prompting date updates or design-win confirmation.",
         result: [
@@ -137,8 +139,9 @@ export const caseStudies: CaseStudy[] = [
         role: {
           mine: "I built the tool.",
           team:
-            "Five PMs adopted and used it. [Question: did someone request it, and who supplied or owned the source data?]",
+            "Five PMs adopted and used it.",
         },
+        decisionOnly: true,
         tradeoff:
           "I consolidated funnel and distribution data into one tool, segmented by region and filterable by use case, instead of leaving each PM to prepare it separately.",
         did: "Built an Excel VBA tool that consolidated funnel and distribution data.",
@@ -158,8 +161,9 @@ export const caseStudies: CaseStudy[] = [
           mine:
             "I consolidated the product KPIs into Excel/Tableau dashboards and used them to surface deviations and products with high pipeline but low revenue.",
           team:
-            "Six teams used the dashboards to monitor launches. [Question: who owned the underlying data sources the dashboards drew on?]",
+            "Six teams used the dashboards to monitor launches.",
         },
+        decisionOnly: true,
         tradeoff:
           "I centralized product KPIs into one shared view so deviations and high-pipeline, low-revenue products were visible in one place.",
         did: "Built Excel/Tableau dashboards that consolidated product KPIs and launch performance.",
@@ -179,8 +183,9 @@ export const caseStudies: CaseStudy[] = [
           mine:
             "I interviewed stakeholders, reviewed usage data, and wrote the documentation and training.",
           team:
-            "I did not build Dynamics or Power BI. [Question: who owned the platforms, and who ran or attended the training?]",
+            "I did not build Dynamics or Power BI.",
         },
+        decisionOnly: true,
         tradeoff:
           "I standardized how teams use the existing platforms and documented best practices.",
         did: "Wrote documentation and training, clarified best practices, and standardized workflows across teams.",

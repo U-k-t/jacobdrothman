@@ -83,7 +83,7 @@ function EntryBody({ entry }: { entry: WorkEntry }) {
 
       <div className="border-l-2 border-[#1fa2ff] pl-5 -ml-1">
         <h3 className="text-xs uppercase tracking-wider text-[#1fa2ff] mb-2">
-          Key decision / tradeoff
+          {entry.decisionOnly ? "Key decision" : "Key decision / tradeoff"}
         </h3>
         <p className="text-lg">
           <Text>{entry.tradeoff}</Text>

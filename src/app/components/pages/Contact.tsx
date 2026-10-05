@@ -15,7 +15,7 @@ export function Contact() {
           <h1 className="mb-6">Contact</h1>
 
           <p className="text-lg text-muted-foreground mb-12">
-            I'm looking for product management roles in software, fintech, productivity, and AI-enabled products. If you're hiring, or want to talk about a product problem, email is the best way to reach me.
+            I'm looking for software product management roles, especially in B2B software and fintech. If you're hiring, email is the best way to reach me.
           </p>
 
           <div className="bg-card border border-border rounded-lg p-6 space-y-4">

@@ -3,6 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { caseStudies } from "../../data/work";
 import { productProjects } from "../../data/projects";
 
+// Projects are listed by maturity; the first two have real use, the rest are earlier-stage.
+const mature = productProjects.slice(0, 2);
+const early = productProjects.slice(2);
+
 export function Work() {
   return (
     <div className="min-h-[calc(100vh-theme(spacing.16))]">
@@ -10,8 +14,8 @@ export function Work() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="mb-6">Work</h1>
           <p className="text-lg text-muted-foreground mb-12 max-w-3xl">
-            Each case study covers the problem, my role, the decision I made, what shipped or changed,
-            and the result.
+            Three case studies from Infineon and my startup, then smaller products I built on my own.
+            Each covers the problem, what I owned, the key decision, and the result.
           </p>
 
           <h2 id="selected-work" className="mb-6 scroll-mt-24">
@@ -49,10 +53,10 @@ export function Work() {
               Product Projects
             </h2>
             <p className="text-muted-foreground mb-6 max-w-3xl">
-              Personal projects, ordered by how far each has been used and validated. They are at different stages on purpose.
+              Small tools I built for my own use, ordered by how far each has been used and validated.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {productProjects.map((project) => (
+            <div className="grid sm:grid-cols-2 gap-6">
+              {mature.map((project) => (
                 <Link
                   key={project.slug}
                   to={`/work/projects/${project.slug}`}
@@ -75,6 +79,22 @@ export function Work() {
                 </Link>
               ))}
             </div>
+            {early.map((project) => (
+              <Link
+                key={project.slug}
+                to={`/work/projects/${project.slug}`}
+                className="group mt-6 block border border-dashed border-border rounded-lg px-6 py-4 hover:border-[#1fa2ff]/30 transition-colors"
+              >
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 className="group-hover:text-[#1fa2ff] transition-colors">{project.title}</h3>
+                  <span className="text-xs text-muted-foreground">
+                    {project.maturity}
+                    {project.maturityNote ? ` · ${project.maturityNote}` : ""}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">{project.tagline}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

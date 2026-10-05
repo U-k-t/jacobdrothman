@@ -1,13 +1,15 @@
 import { Link } from "react-router";
-import { ArrowRight, Linkedin, FileText } from "lucide-react";
+import { ArrowRight, Linkedin, Download } from "lucide-react";
 
+// Place the PDF at public/Jacob-Rothman-Resume.pdf
+const RESUME_PDF = "/Jacob-Rothman-Resume.pdf";
 const LINKEDIN_URL = "https://www.linkedin.com/in/jacob-rothman/";
 
 const stats = [
   { value: "5+ yrs", label: "Product experience, Infineon 2021 – 2026" },
   { value: "$30M+", label: "Realized revenue to date from an AI-infrastructure hardware product line" },
   { value: "30%", label: "Increase in internal CRM and analytics adoption (active/licensed users)" },
-  { value: "25+", label: "Research participants in Trusty discovery, mostly target brokers" },
+  { value: "BS CS", label: "Architected Trusty's MVP; built the Python and VBA tools described below" },
 ];
 
 // Cards read as a progression: scale, then 0-to-1, then product operations.
@@ -87,7 +89,7 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-28 relative">
           <div className="max-w-3xl">
             <p className="text-sm uppercase tracking-wider text-[#1fa2ff] mb-4">
-              Jacob Rothman · Product management for B2B software and fintech
+              Technical Product Manager · B2B Software &amp; Fintech
             </p>
             <h1 className="text-4xl lg:text-6xl mb-6 tracking-tight">
               CS-trained product manager who turns customer research into{" "}
@@ -96,28 +98,29 @@ export function Home() {
               </span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-              5+ years owning roadmap, customer, and launch decisions for technical products at Infineon. Now focused on B2B software and fintech.
+              5+ years owning roadmap, customer, and launch decisions for semiconductor hardware at Infineon, after co-founding a software startup. Now bringing that product ownership into software.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/work"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-[#1fa2ff]/25 transition-all"
+                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 bg-gradient-to-r from-[#1fa2ff] to-[#60b8ff] text-white px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-[#1fa2ff]/25 transition-all"
               >
                 View My Work
                 <ArrowRight size={20} />
               </Link>
-              <Link
-                to="/resume"
-                className="inline-flex items-center gap-2 border-2 border-[#1fa2ff] text-[#1fa2ff] px-6 py-3 rounded-lg hover:bg-[#1fa2ff]/10 transition-colors"
+              <a
+                href={RESUME_PDF}
+                download
+                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 border-2 border-[#1fa2ff] text-[#1fa2ff] px-6 py-3 rounded-lg hover:bg-[#1fa2ff]/10 transition-colors"
               >
-                <FileText size={20} />
-                Resume
-              </Link>
+                <Download size={20} />
+                Download Resume
+              </a>
               <a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border-2 border-border px-6 py-3 rounded-lg hover:bg-accent transition-colors"
+                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 border-2 border-border px-6 py-3 rounded-lg hover:bg-accent transition-colors"
               >
                 <Linkedin size={20} />
                 LinkedIn
@@ -182,15 +185,6 @@ export function Home() {
               </article>
             ))}
           </div>
-          <div className="mt-8">
-            <Link
-              to="/work"
-              className="inline-flex items-center gap-1 text-[#1fa2ff] hover:gap-2 transition-all"
-            >
-              See all work
-              <ArrowRight size={16} />
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -212,7 +206,7 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl mb-4">Get in touch</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm looking for product roles in software, especially productivity and fintech. Get in touch to discuss a role or learn more about my work.
+            I'm looking for software product management roles, especially in B2B software and fintech. Get in touch to discuss a role.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
