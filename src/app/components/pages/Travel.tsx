@@ -1,36 +1,46 @@
+import { useEffect } from "react";
 import { MapPin } from "lucide-react";
-import { useMemo } from "react";
-import { journeys, type Journey } from "../../data/travelJourneys";
 import { TravelMap } from "../TravelMap";
 
-/** Unique stop names in visit order (a stop like "Rome" revisited later collapses to one label). */
-function uniqueStopNames(journey: Journey): string[] {
-  return Array.from(new Set(journey.stops.map((stop) => stop.location.name)));
-}
-
-function journeyLabel(journey: Journey): string {
-  const base = uniqueStopNames(journey).join(" & ");
-  return journey.caption ? `${base} (${journey.caption})` : base;
-}
-
-/**
- * Year-grouped display chips, derived directly from the same `journeys` dataset that drives
- * the animated map — not a hand-maintained duplicate — so this list can't drift from the map.
- */
-function buildTimeline(source: Journey[]) {
-  const byYear = new Map<number, string[]>();
-  for (const journey of source) {
-    const places = byYear.get(journey.start.year) ?? [];
-    places.push(journeyLabel(journey));
-    byYear.set(journey.start.year, places);
-  }
-  return Array.from(byYear.entries())
-    .sort((a, b) => b[0] - a[0])
-    .map(([year, places]) => ({ year: String(year), places }));
-}
-
 export function Travel() {
-  const timeline = useMemo(() => buildTimeline(journeys), []);
+  useEffect(() => {
+    const previous = document.title;
+    document.title = "Travel | Jacob Rothman";
+    return () => {
+      document.title = previous;
+    };
+  }, []);
+
+  const timeline = [
+    { year: "2026", places: ["Zurich", "Rome"] },
+    { year: "2025", places: ["California Central Coast"] },
+    { year: "2024", places: ["Taipei, Shenzhen & Shanghai", "Shanghai & Taipei"] },
+    { year: "2023", places: ["Taipei", "Tokyo, Kyoto & Osaka"] },
+    {
+      year: "2022",
+      places: [
+        "Ljubljana",
+        "Venice",
+        "Salzburg & Hallstatt",
+        "Munich, Germany — moved for work",
+        "Madrid",
+        "Amsterdam",
+        "Berlin",
+        "Turin",
+        "Budapest",
+        "Geneva & Lyon",
+        "Barcelona",
+        "Prague",
+      ],
+    },
+    { year: "2021", places: ["Villach, Austria — moved for work", "Vienna", "Florence"] },
+    { year: "2016", places: ["Ireland (road trip)"] },
+    { year: "2015", places: ["Seattle", "Alaska Cruise (+ Canada)"] },
+    { year: "2014", places: ["New England (college tour)", "Puerto Rico", "Caribbean Cruise"] },
+    { year: "2013", places: ["Caribbean Cruise"] },
+    { year: "2010", places: ["London", "Paris", "Rome", "Mediterranean Cruise"] },
+    { year: "2006", places: ["Ensenada, Mexico"] },
+  ];
 
   return (
     <div className="min-h-[calc(100vh-theme(spacing.16))]">
@@ -40,10 +50,10 @@ export function Travel() {
 
           <p className="text-lg text-muted-foreground mb-12">
             I grew up in Southern California, and travel has been a constant since — from
-            family trips and cruises early on to two work relocations to Europe (Villach,
-            Austria in 2021, then Munich, Germany in 2022) that put most of the continent
-            within a short flight. That same curiosity has taken me across East Asia and
-            back home to explore more of California too.
+            family trips and cruises early on to two work moves to Europe (Villach, Austria
+            in 2021, then Munich, Germany in 2022) that put most of the continent within a
+            short flight. Since then I've also been to East Asia and explored more of
+            California.
           </p>
 
           <TravelMap />
@@ -61,9 +71,9 @@ export function Travel() {
                   <div className="flex-1">
                     <h3 className="mb-2">{entry.year}</h3>
                     <div className="flex flex-wrap gap-2">
-                      {entry.places.map((place, index) => (
+                      {entry.places.map((place) => (
                         <span
-                          key={`${entry.year}-${index}-${place}`}
+                          key={place}
                           className="bg-accent px-3 py-1 rounded-full text-sm text-muted-foreground"
                         >
                           {place}
@@ -74,17 +84,6 @@ export function Travel() {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="mt-12 bg-accent/50 border border-border rounded-lg p-6">
-            <h3 className="mb-3">What Travel Teaches Me</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>• Empathy for diverse user needs and cultural contexts</li>
-              <li>• Adaptability when plans change unexpectedly</li>
-              <li>• The importance of research and preparation</li>
-              <li>• How to communicate across language and cultural barriers</li>
-              <li>• Finding creative solutions with limited resources</li>
-            </ul>
           </div>
         </div>
       </section>

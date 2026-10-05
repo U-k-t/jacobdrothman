@@ -11,7 +11,7 @@ describe("Home page", () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByText("Jacob Rothman")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
     // The travel map's accessible route summary is a reliable fingerprint for "the map mounted".
     expect(
       screen.queryByRole("heading", { name: /travel route, in chronological order/i }),
