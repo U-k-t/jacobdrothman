@@ -1,4 +1,4 @@
-// Single source of truth for the Work hub and case-study pages.
+﻿// Single source of truth for the Work hub and case-study pages.
 // Every entry follows the PM case-study format:
 // problem, role (mine vs. team), key decision/tradeoff, what I did, result, what I learned, optional hindsight.
 
@@ -191,22 +191,6 @@ export const caseStudies: CaseStudy[] = [
           "The problem was inconsistent use of tools that already existed, so the lever was shared practice and training rather than new functionality.",
       },
     ],
-  },
-];
-
-export type SideProject = {
-  title: string;
-  tech: string;
-  description: string;
-};
-
-// Secondary to the case studies. Only projects with supported facts belong here.
-export const sideProjects: SideProject[] = [
-  {
-    title: "Fountain",
-    tech: "Python, Discord API, Raspberry Pi, systemd · built with Claude Code · July 2026",
-    description:
-      "An apartment availability and rent-change monitor I built for my partner and me during an active rental search. It checks listings hourly, compares each run to the previous snapshot, and sends Discord alerts when availability or rent changes. It runs continuously on a Raspberry Pi via a systemd timer.",
   },
 ];
 

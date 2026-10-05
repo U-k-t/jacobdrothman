@@ -8,7 +8,7 @@ const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 // Text that still needs real content. Anything in "[Question: ...]" brackets is styled as a to-do.
-function Text({ children }: { children: string }) {
+export function Text({ children }: { children: string }) {
   const parts = children.split(/(\[Question:[^\]]*\])/g).filter(Boolean);
   return (
     <>

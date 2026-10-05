@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
-import { caseStudies, sideProjects } from "../../data/work";
+import { caseStudies } from "../../data/work";
+import { productProjects } from "../../data/projects";
 
 export function Work() {
   return (
@@ -44,17 +45,36 @@ export function Work() {
           </div>
 
           <div className="mt-20 pt-10 border-t border-border">
-            <h2 id="side-projects" className="text-xl mb-1 scroll-mt-24">
-              Side Projects
+            <h2 id="projects" className="mb-2 scroll-mt-24">
+              Product Projects
             </h2>
-            <p className="text-sm text-muted-foreground mb-5">Personal projects built outside of work.</p>
-            {sideProjects.map((project) => (
-              <div key={project.title} className="max-w-3xl">
-                <h3 className="text-base mb-1">{project.title}</h3>
-                <p className="text-xs text-muted-foreground mb-2">{project.tech}</p>
-                <p className="text-sm text-muted-foreground">{project.description}</p>
-              </div>
-            ))}
+            <p className="text-muted-foreground mb-6 max-w-3xl">
+              Personal projects, ordered by how far each has been used and validated. They are at different stages on purpose.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {productProjects.map((project) => (
+                <Link
+                  key={project.slug}
+                  to={`/work/projects/${project.slug}`}
+                  className="group flex flex-col items-start bg-card border border-border rounded-lg p-6 hover:shadow-lg hover:border-[#1fa2ff]/30 transition-all"
+                >
+                  <span className="inline-block text-xs bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 text-[#1fa2ff] px-3 py-1 rounded-full mb-3">
+                    {project.maturity}
+                  </span>
+                  <h3 className="text-xl mb-1 group-hover:text-[#1fa2ff] transition-colors">
+                    {project.title}
+                  </h3>
+                  {project.maturityNote && (
+                    <p className="text-xs text-muted-foreground mb-3">{project.maturityNote}</p>
+                  )}
+                  <p className="text-sm text-muted-foreground mb-4">{project.tagline}</p>
+                  <span className="mt-auto inline-flex items-center gap-1 text-sm text-[#1fa2ff] group-hover:gap-2 transition-all">
+                    Read more
+                    <ArrowRight size={16} />
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
