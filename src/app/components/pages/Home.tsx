@@ -7,9 +7,21 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/jacob-rothman/";
 
 const stats = [
   { value: "5+ yrs", label: "Product experience, Infineon 2021 – 2026" },
-  { value: "$30M+", label: "Realized revenue to date from an AI-infrastructure hardware product line" },
-  { value: "30%", label: "Increase in internal CRM and analytics adoption (active/licensed users)" },
-  { value: "BS CS", label: "Architected Trusty's MVP; built the Python and VBA tools described below" },
+  {
+    value: "$30M+",
+    label:
+      "Realized revenue to date from an AI-infrastructure hardware product line",
+  },
+  {
+    value: "30%",
+    label:
+      "Increase in internal CRM and analytics adoption (active/licensed users)",
+  },
+  {
+    value: "BS CS",
+    label:
+      "Architected Trusty's MVP; built the Python and VBA tools described below",
+  },
 ];
 
 // Cards read as a progression: scale, then 0-to-1, then product operations.
@@ -98,7 +110,7 @@ export function Home() {
               </span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-              5+ years owning roadmap, customer, and launch decisions for semiconductor hardware at Infineon, after co-founding a software startup. Now bringing that product ownership into software.
+              I turn customer insight into roadmap decisions and lead cross-functional teams through launch. Across Infineon and a B2B marketplace I co-founded, I've owned product priorities and balanced customer needs, technical constraints, and business impact. With a Computer Science background, I also build software tools that improve how teams work.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -131,8 +143,12 @@ export function Home() {
           <dl className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-14 max-w-5xl">
             {stats.map((stat) => (
               <div key={stat.label} className="border-l-2 border-brand/40 pl-4">
-                <dt className="text-2xl lg:text-3xl text-brand-strong">{stat.value}</dt>
-                <dd className="text-sm text-muted-foreground mt-1">{stat.label}</dd>
+                <dt className="text-2xl lg:text-3xl text-brand-strong">
+                  {stat.value}
+                </dt>
+                <dd className="text-sm text-muted-foreground mt-1">
+                  {stat.label}
+                </dd>
               </div>
             ))}
           </dl>
@@ -169,7 +185,10 @@ export function Home() {
                 </p>
                 <ul className="space-y-2 mb-5">
                   {item.outcomes.map((outcome) => (
-                    <li key={outcome} className="flex items-start gap-2 text-sm">
+                    <li
+                      key={outcome}
+                      className="flex items-start gap-2 text-sm"
+                    >
                       <span className="text-brand-strong mt-0.5">→</span>
                       <span>{outcome}</span>
                     </li>
@@ -206,7 +225,8 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl mb-4">Get in touch</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm looking for software product management roles, especially in B2B software and fintech. Get in touch to discuss a role.
+            I'm looking for software product management roles, especially in B2B
+            software and fintech. Get in touch to discuss a role.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

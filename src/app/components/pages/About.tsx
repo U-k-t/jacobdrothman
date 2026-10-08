@@ -21,7 +21,7 @@ const chapters = [
   {
     label: "Next",
     title: "Software product management",
-    body: "I'm moving into software product management. I started out building software, and my product roles have kept me close to technical tradeoffs. Software PM is where I want to apply that ownership next, working with engineers, customers, and data.",
+    body: "I'm pursuing Product Manager and Senior Product Manager roles in software, especially B2B and productivity products and fintech. I want to bring my experience in customer discovery, roadmap ownership, and cross-functional execution to products that improve how people work and make decisions, drawing on both my startup experience and hands-on technical background.",
   },
 ];
 
@@ -33,7 +33,7 @@ export function About() {
           <h1 className="mb-8">About Me</h1>
 
           <p className="text-lg text-muted-foreground mb-12">
-            I'm a product manager with a Computer Science degree, a startup I co-founded, and five years of product work on technical products in Europe. Software product management is where I'm taking that next.
+            I'm a product manager with a Computer Science background and experience spanning a B2B marketplace and Infineon. At Trusty, I led discovery and product definition alongside architecture and implementation. At Infineon, I took on increasingly complex product decisions, aligning teams around customer requirements, roadmap priorities, and launch tradeoffs.
           </p>
 
           <div className="space-y-8 mb-16">
@@ -49,8 +49,16 @@ export function About() {
                 <div className="text-sm text-brand-strong mb-1">
                   {index + 1}. {chapter.label}
                 </div>
-                <h3 className={chapter.featured ? "mb-2 text-xl" : "mb-2"}>{chapter.title}</h3>
-                <p className={chapter.featured ? "text-foreground text-lg" : "text-muted-foreground"}>
+                <h3 className={chapter.featured ? "mb-2 text-xl" : "mb-2"}>
+                  {chapter.title}
+                </h3>
+                <p
+                  className={
+                    chapter.featured
+                      ? "text-foreground text-lg"
+                      : "text-muted-foreground"
+                  }
+                >
                   {chapter.body}
                 </p>
               </div>
@@ -58,7 +66,15 @@ export function About() {
           </div>
 
           <p className="text-muted-foreground mb-16">
-            You can see the details in my <Link to="/resume" className="text-brand-strong hover:underline">resume</Link> and the <Link to="/work" className="text-brand-strong hover:underline">work</Link> behind it.
+            You can see the details in my{" "}
+            <Link to="/resume" className="text-brand-strong hover:underline">
+              resume
+            </Link>{" "}
+            and the{" "}
+            <Link to="/work" className="text-brand-strong hover:underline">
+              work
+            </Link>{" "}
+            behind it.
           </p>
 
           <h2 className="mb-6">Outside of Work</h2>
@@ -73,7 +89,8 @@ export function About() {
               </div>
               <h3 className="mb-2">Travel</h3>
               <p className="text-muted-foreground mb-4">
-                Trips across Europe, East Asia, and the US, plus two work moves to Austria and Germany.
+                Trips across Europe, East Asia, and the US, plus two work moves
+                to Austria and Germany.
               </p>
               <span className="text-brand-strong group-hover:underline">
                 Read more →
@@ -89,7 +106,8 @@ export function About() {
               </div>
               <h3 className="mb-2">Climbing</h3>
               <p className="text-muted-foreground mb-4">
-                Bouldering about twice a week, in gyms around the world and outdoors in Southern California.
+                Bouldering about twice a week, in gyms around the world and
+                outdoors in Southern California.
               </p>
               <span className="text-brand-strong group-hover:underline">
                 Read more →

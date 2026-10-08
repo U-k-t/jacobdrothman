@@ -49,7 +49,8 @@ export function Resume() {
     },
     {
       title: "Co-Founder",
-      scope: "Product and technical lead, including architecture and implementation; one of four co-founders",
+      scope:
+        "Product and technical lead, including architecture and implementation; one of four co-founders",
       company: "Trusty (formerly Glacier)",
       period: "Mar 2020 - Sep 2021",
       achievements: [
@@ -61,13 +62,21 @@ export function Resume() {
 
   const education = [
     {
-      degree: "BS, Computer Science, Minor in Entrepreneurship and Business Management",
+      degree:
+        "BS, Computer Science, Minor in Entrepreneurship and Business Management",
       school: "California State Polytechnic University, Pomona",
       year: "",
     },
   ];
 
-  const skills = ["SQL", "Python", "Excel / VBA", "Tableau", "Funnel Analysis", "Systems Design"];
+  const skills = [
+    "SQL",
+    "Python",
+    "Excel / VBA",
+    "Tableau",
+    "Funnel Analysis",
+    "Systems Design",
+  ];
 
   return (
     <div className="min-h-[calc(100vh-theme(spacing.16))]">
@@ -85,7 +94,7 @@ export function Resume() {
             </a>
           </div>
           <p className="text-lg text-muted-foreground mb-12">
-            Product manager with 5+ years owning roadmap and prioritization decisions, customer discovery, and launches for semiconductor hardware at Infineon. Computer Science degree, plus startup experience as a co-founder. Moving that product ownership into software.
+            Product manager with 5+ years of product experience at Infineon, spanning customer discovery, roadmap prioritization, cross-functional execution, and launches. Owned feature and positioning decisions through launch for a semiconductor product line serving AI infrastructure that generated $30M+ in realized revenue to date. Computer Science background and B2B marketplace co-founder with hands-on software architecture and development experience.
           </p>
 
           <div className="space-y-12">
@@ -97,20 +106,31 @@ export function Resume() {
                 <h2>Experience</h2>
               </div>
               <p className="text-sm text-muted-foreground mb-6">
-                Official titles are shown as headings. "Product scope" is my own mapping of each role to product management levels, not a title I held.{" "}
-                <Link to="/work" className="text-brand-strong hover:underline">See the work behind it</Link>.
+                Official titles are shown as headings. "Product scope" is my own
+                mapping of each role to product management levels, not a title I
+                held.{" "}
+                <Link to="/work" className="text-brand-strong hover:underline">
+                  See the work behind it
+                </Link>
+                .
               </p>
               <div className="space-y-8">
                 {experience.map((job, index) => (
                   <div key={index} className="border-l-2 border-brand/30 pl-6">
                     <h3 className="mb-1">{job.title}</h3>
                     <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="text-muted-foreground">{job.company}</span>
+                      <span className="text-muted-foreground">
+                        {job.company}
+                      </span>
                       <span className="text-muted-foreground">•</span>
-                      <span className="text-sm text-muted-foreground">{job.period}</span>
+                      <span className="text-sm text-muted-foreground">
+                        {job.period}
+                      </span>
                     </div>
                     {job.scope && (
-                      <p className="text-sm text-muted-foreground/80 mb-3">{job.scope}</p>
+                      <p className="text-sm text-muted-foreground/80 mb-3">
+                        {job.scope}
+                      </p>
                     )}
                     <ul className="space-y-2">
                       {job.achievements.map((achievement, achievementIndex) => (
@@ -121,10 +141,14 @@ export function Resume() {
                           <span className="text-brand-strong mt-1">•</span>
                           <span>
                             {(() => {
-                              const m = achievement.match(/^([^:]{3,32}): (.*)$/s);
+                              const m =
+                                achievement.match(/^([^:]{3,32}): (.*)$/s);
                               return m ? (
                                 <>
-                                  <span className="text-foreground font-medium">{m[1]}:</span> {m[2]}
+                                  <span className="text-foreground font-medium">
+                                    {m[1]}:
+                                  </span>{" "}
+                                  {m[2]}
                                 </>
                               ) : (
                                 achievement
@@ -151,11 +175,15 @@ export function Resume() {
                   <div key={index} className="border-l-2 border-brand/30 pl-6">
                     <h3 className="mb-1">{edu.degree}</h3>
                     <div className="flex items-center gap-2">
-                      <span className="text-muted-foreground">{edu.school}</span>
+                      <span className="text-muted-foreground">
+                        {edu.school}
+                      </span>
                       {edu.year && (
                         <>
                           <span className="text-muted-foreground">•</span>
-                          <span className="text-sm text-muted-foreground">{edu.year}</span>
+                          <span className="text-sm text-muted-foreground">
+                            {edu.year}
+                          </span>
                         </>
                       )}
                     </div>
@@ -173,7 +201,10 @@ export function Resume() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {skills.map((skill) => (
-                  <span key={skill} className="bg-accent px-3 py-1 rounded-full text-sm">
+                  <span
+                    key={skill}
+                    className="bg-accent px-3 py-1 rounded-full text-sm"
+                  >
                     {skill}
                   </span>
                 ))}
