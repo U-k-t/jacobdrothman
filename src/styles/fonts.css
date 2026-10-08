@@ -1,9 +1,5 @@
-/* Self-hosted via fontsource. Brand A (Pairing 3 "Systematic") uses Plex Sans/Mono only;
-   Brand B (Pairing 1 "Editorial") adds Source Serif 4 for display and Public Sans for body. */
+/* Self-hosted via fontsource: Source Serif 4 (display), Public Sans (body), IBM Plex Mono (code). */
 
-@import '@fontsource/ibm-plex-sans/400.css';
-@import '@fontsource/ibm-plex-sans/500.css';
-@import '@fontsource/ibm-plex-sans/600.css';
 @import '@fontsource/ibm-plex-mono/400.css';
 @import '@fontsource/ibm-plex-mono/500.css';
 @import '@fontsource/source-serif-4/400.css';
