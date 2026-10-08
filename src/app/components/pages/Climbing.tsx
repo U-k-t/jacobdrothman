@@ -1,6 +1,15 @@
-import { Award, TrendingUp, MapPin } from "lucide-react";
+import { useEffect } from "react";
+import { Award, MapPin } from "lucide-react";
 
 export function Climbing() {
+  useEffect(() => {
+    const previous = document.title;
+    document.title = "Climbing | Jacob Rothman";
+    return () => {
+      document.title = previous;
+    };
+  }, []);
+
   const outdoorAreas = [
     { area: "Stoney Point, CA", problems: ["Slime", "Spiral", "Gomers Pile"] },
     { area: "Tramway, CA", problems: ["Terminator", "+ various attempts"] },
@@ -16,16 +25,14 @@ export function Climbing() {
           <h1 className="mb-6">Rock Climbing</h1>
 
           <p className="text-lg text-muted-foreground mb-12">
-            I boulder about twice a week. Rock climbing has taught me invaluable lessons about
-            problem-solving, risk management, and perseverance — each problem is like a product
-            challenge: assess it, plan your approach, adapt when necessary, and push through
-            when it gets tough.
+            I boulder about twice a week, in gyms and outdoors in Southern California. I've
+            also climbed in gyms in Munich, Tokyo, and Shenzhen.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4 mb-12">
             <div className="bg-accent/50 border border-border rounded-lg p-6 flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Award className="text-[#1fa2ff]" size={20} />
+              <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Award className="text-brand-strong" size={20} />
               </div>
               <div>
                 <div className="text-sm text-muted-foreground">Current level</div>
@@ -33,8 +40,8 @@ export function Climbing() {
               </div>
             </div>
             <div className="bg-accent/50 border border-border rounded-lg p-6 flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin className="text-[#1fa2ff]" size={20} />
+              <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <MapPin className="text-brand-strong" size={20} />
               </div>
               <div>
                 <div className="text-sm text-muted-foreground">Frequency</div>
@@ -49,7 +56,7 @@ export function Climbing() {
               {outdoorAreas.map((entry) => (
                 <div
                   key={entry.area}
-                  className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-[#1fa2ff]/30 transition-all"
+                  className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-brand/30 transition-all"
                 >
                   <h3 className="mb-3">{entry.area}</h3>
                   <div className="flex flex-wrap gap-2">
@@ -79,20 +86,6 @@ export function Climbing() {
                 </span>
               ))}
             </div>
-          </div>
-
-          <div className="bg-accent/50 border border-border rounded-lg p-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center mb-4">
-              <TrendingUp className="text-[#1fa2ff]" size={20} />
-            </div>
-            <h3 className="mb-3">Parallels to Product Management</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>• Breaking complex problems into manageable sequences</li>
-              <li>• Continuous assessment and adaptation</li>
-              <li>• Trusting your team and clear communication</li>
-              <li>• Knowing when to push forward and when to retreat</li>
-              <li>• Preparation and planning for the unexpected</li>
-            </ul>
           </div>
         </div>
       </section>

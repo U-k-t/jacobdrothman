@@ -1,5 +1,5 @@
+import { useEffect, useMemo } from "react";
 import { MapPin } from "lucide-react";
-import { useMemo } from "react";
 import { journeys, type Journey } from "../../data/travelJourneys";
 import { TravelMap } from "../TravelMap";
 
@@ -30,6 +30,14 @@ function buildTimeline(source: Journey[]) {
 }
 
 export function Travel() {
+  useEffect(() => {
+    const previous = document.title;
+    document.title = "Travel | Jacob Rothman";
+    return () => {
+      document.title = previous;
+    };
+  }, []);
+
   const timeline = useMemo(() => buildTimeline(journeys), []);
 
   return (
@@ -40,10 +48,10 @@ export function Travel() {
 
           <p className="text-lg text-muted-foreground mb-12">
             I grew up in Southern California, and travel has been a constant since — from
-            family trips and cruises early on to two work relocations to Europe (Villach,
-            Austria in 2021, then Munich, Germany in 2022) that put most of the continent
-            within a short flight. That same curiosity has taken me across East Asia and
-            back home to explore more of California too.
+            family trips and cruises early on to two work moves to Europe (Villach, Austria
+            in 2021, then Munich, Germany in 2022) that put most of the continent within a
+            short flight. Since then I've also been to East Asia and explored more of
+            California.
           </p>
 
           <TravelMap />
@@ -52,11 +60,11 @@ export function Travel() {
             {timeline.map((entry) => (
               <div
                 key={entry.year}
-                className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-[#1fa2ff]/30 transition-all"
+                className="bg-card border border-border rounded-lg p-6 hover:shadow-md hover:border-brand/30 transition-all"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-[#1fa2ff]/20 to-[#60b8ff]/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-[#1fa2ff]" size={20} />
+                  <div className="w-10 h-10 bg-gradient-to-br from-brand/20 to-brand-soft/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="text-brand-strong" size={20} />
                   </div>
                   <div className="flex-1">
                     <h3 className="mb-2">{entry.year}</h3>
@@ -74,17 +82,6 @@ export function Travel() {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="mt-12 bg-accent/50 border border-border rounded-lg p-6">
-            <h3 className="mb-3">What Travel Teaches Me</h3>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>• Empathy for diverse user needs and cultural contexts</li>
-              <li>• Adaptability when plans change unexpectedly</li>
-              <li>• The importance of research and preparation</li>
-              <li>• How to communicate across language and cultural barriers</li>
-              <li>• Finding creative solutions with limited resources</li>
-            </ul>
           </div>
         </div>
       </section>

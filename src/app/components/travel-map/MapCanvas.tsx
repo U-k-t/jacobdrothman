@@ -78,7 +78,7 @@ export function MapCanvas({ legs, activeLegIndex }: MapCanvasProps) {
                   cx={x}
                   cy={y}
                   r={6}
-                  className="fill-none stroke-brand-blue"
+                  className="fill-none stroke-brand"
                   strokeWidth="1.5"
                   initial={{ opacity: 0.6, scale: 1 }}
                   animate={{ opacity: 0, scale: 2.2 }}
@@ -89,7 +89,7 @@ export function MapCanvas({ legs, activeLegIndex }: MapCanvasProps) {
                 cx={x}
                 cy={y}
                 r={isCurrent ? 5 : 3.5}
-                className={isCurrent ? "fill-brand-blue" : "fill-brand-blue-light"}
+                className={isCurrent ? "fill-brand" : "fill-brand-soft"}
               />
             </motion.g>
           );
